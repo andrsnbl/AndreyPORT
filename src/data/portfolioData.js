@@ -4,6 +4,22 @@
 //  Jika ingin mengubah teks, cukup edit file ini saja.
 // ─────────────────────────────────────────────────────────────
 
+/**
+ * Menghitung umur otomatis dari string tanggal lahir.
+ * Format contoh: 'July 1999' atau '1 July 1999'
+ */
+function getAgeFromBirthday(birthdayStr) {
+  const match = birthdayStr.match(/(\w+)\s+(\d{4})/)
+  if (!match) return null
+  const [, monthStr, yearStr] = match
+  const birthYear = parseInt(yearStr, 10)
+  const birthMonth = new Date(`${monthStr} 1, ${birthYear}`).getMonth()
+  const today = new Date()
+  let age = today.getFullYear() - birthYear
+  if (today.getMonth() < birthMonth) age--
+  return age.toString()
+}
+
 // Navigasi
 export const NAV_LINKS = [
   { href: '#hero',        label: 'Home'     },
@@ -31,10 +47,11 @@ export const HERO_STATS = [
   { number: '4',   label: 'Services' },
 ]
 
-// About — informasi pribadi
+// About — informasi pribadi (Age dihitung otomatis dari Birthday)
+const BIRTHDAY = 'July 1999'
 export const ABOUT_INFO = [
-  { key: 'Birthday',  value: 'July 1999'              },
-  { key: 'Age',       value: '25'                      },
+  { key: 'Birthday',  value: BIRTHDAY                  },
+  { key: 'Age',       value: getAgeFromBirthday(BIRTHDAY) ?? '25' },
   { key: 'Degree',    value: 'Sistem Informasi'        },
   { key: 'Freelance', value: 'Available'               },
   { key: 'Location',  value: 'Medan, Indonesia'        },
