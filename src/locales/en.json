@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "resume": "Resume",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "clients": "Clients",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Available for Freelance Projects",
+    "greeting": "I'M",
+    "desc": "Fresh web development graduate with solid foundation in design & development. Based in Medan, Indonesia.",
+    "downloadCV": "⬇ Download CV",
+    "getInTouch": "Get In Touch →",
+    "stats": {
+      "projects": "Projects",
+      "clients": "Clients",
+      "years": "Years",
+      "services": "Services"
+    }
+  },
+  "about": {
+    "tag": "About Me",
+    "title": "Hello, I'm",
+    "desc": "A passionate web designer and developer from Medan, Indonesia. Graduated in Information Systems with hands-on experience in UI/UX, graphic design, and web development.",
+    "badge": "Projects Completed",
+    "downloadCV": "⬇ Download CV",
+    "sendEmail": "✉ Send Email",
+    "infoKeys": {
+      "birthday": "Birthday",
+      "age": "Age",
+      "degree": "Degree",
+      "freelance": "Freelance",
+      "location": "Location",
+      "email": "Email"
+    },
+    "stats": {
+      "downloads": "Downloads",
+      "projects": "Projects",
+      "awards": "Awards",
+      "clients": "Clients"
+    }
+  },
+  "resume": {
+    "tag": "Resume",
+    "title": "My Resume",
+    "subtitle": "I am available for freelance projects",
+    "education": "Education",
+    "experience": "Experience",
+    "skillsTitle": "Technical Skills"
+  },
+  "services": {
+    "tag": "What I Do",
+    "title": "My Services",
+    "subtitle": "Services I offer to my clients"
+  },
+  "portfolio": {
+    "tag": "My Work",
+    "title": "Creative Works",
+    "subtitle": "Meet my awesome works and enjoy",
+    "filters": {
+      "all": "All",
+      "webdesign": "Web Design",
+      "mobiledesign": "Mobile Design",
+      "seo": "SEO",
+      "graphic": "Graphic"
+    }
+  },
+  "testimonial": {
+    "tag": "Testimonials",
+    "title": "My Clients",
+    "subtitle": "What my clients say about me"
+  },
+  "blog": {
+    "tag": "Blog",
+    "title": "Latest News",
+    "subtitle": "Check out my latest blog posts",
+    "by": "by Andrey",
+    "readMore": "Read More →",
+    "label": "Blog Post"
+  },
+  "contact": {
+    "tag": "Contact",
+    "title": "Get In Touch",
+    "subtitle": "Feel free to contact me any time",
+    "colLeft": "Let's Work Together",
+    "colLeftDesc": "Fresh web development graduate with solid foundation in HTML/CSS/JavaScript. Looking for opportunities to contribute while learning from experienced developers.",
+    "colRight": "How Can I Help You?",
+    "labels": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "form": {
+      "name": "Your Name",
+      "namePh": "Andrey Julius",
+      "email": "Email Address",
+      "emailPh": "you@example.com",
+      "message": "Message",
+      "messagePh": "Tell me about your project...",
+      "send": "✉ Send Message",
+      "sending": "⏳ Sending...",
+      "success": "✅ Message sent! I'll get back to you soon.",
+      "error": "⚠️ Please fill in all fields correctly."
+    }
+  },
+  "footer": {
+    "copy": "Built with React. All rights reserved."
+  }
+}

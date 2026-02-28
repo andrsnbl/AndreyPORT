@@ -1,0 +1,113 @@
+/* ── Resume.module.css ── */
+
+/* Background berbeda supaya section ini kontras */
+.resume {
+  background: var(--bg2);
+  max-width: 100% !important;
+  padding: 6rem 2rem !important;
+  scroll-margin-top: 80px;
+}
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Grid dua kolom */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+/* Judul kolom */
+.col       {}
+.colTitle {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+}
+.colTitle span { color: var(--accent); }
+
+/* Timeline */
+.timeline     { list-style: none; position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 8px; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.timelineItem {
+  position: relative;
+  padding: 0 0 2rem 2.5rem;
+}
+.timelineItem::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+}
+.timelineItem h6 {
+  font-size: 0.95rem;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+  font-family: 'Syne', sans-serif;
+}
+.period {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text2);
+  margin-bottom: 0.5rem;
+}
+.timelineItem p {
+  font-size: 0.875rem;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+/* Skill bars */
+.skills {
+  margin-top: 4rem;
+}
+.skillsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 3rem;
+  margin-top: 2rem;
+}
+.skillItem     {}
+.skillHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+.skillPct { color: var(--accent); }
+.skillTrack {
+  height: 6px;
+  background: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.skillFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 100px;
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .grid       { grid-template-columns: 1fr; gap: 3rem; }
+  .skillsGrid { grid-template-columns: 1fr; }
+}

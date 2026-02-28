@@ -1,0 +1,22 @@
+/* ── Footer.module.css ── */
+
+.footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 2rem;
+  color: var(--text2);
+  font-size: 0.875rem;
+}
+
+.accent { color: var(--accent); font-weight: 600; }
+
+.sub {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+}
+.sub a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.sub a:hover { text-decoration: underline; }

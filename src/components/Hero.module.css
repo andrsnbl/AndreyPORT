@@ -1,0 +1,159 @@
+/* ── Hero.module.css ── */
+
+.hero {
+  min-height: 100vh;
+  padding: 8rem 2rem 4rem !important;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 100% !important;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Blob background */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.1;
+}
+.blob1 { width: 500px; height: 500px; background: var(--accent); top: -100px; right: -100px; }
+.blob2 { width: 300px; height: 300px; background: #06B6D4;      bottom: 0;   left: -100px; }
+
+/* Badge available */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--text2);
+}
+.dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22C55E;
+  margin-right: 0.75rem;
+  animation: pulse 2s infinite;
+}
+
+/* Nama */
+.name {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.name span { color: var(--accent); }
+
+/* Typing */
+.typed {
+  font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+  color: var(--text2);
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+.typedWord { color: var(--accent); font-weight: 500; }
+.cursor    { opacity: 0.5; }
+
+/* Deskripsi */
+.desc {
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+}
+
+/* CTA */
+.cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+/* Stats */
+.stats    { display: flex; gap: 2rem; flex-wrap: wrap; }
+.statItem { text-align: center; }
+.statNum  { display: block; font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.statLabel{ display: block; font-size: 0.72rem; color: var(--text2); margin-top: 3px; }
+
+/* Orbit */
+.visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 440px;
+}
+.orbitWrapper {
+  position: relative;
+  width: 320px;
+  height: 320px;
+}
+.orbitOuter,
+.orbitInner {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px dashed rgba(124, 58, 237, 0.25);
+}
+.orbitOuter { width: 100%; height: 100%; animation: spin 18s linear infinite; }
+.orbitInner { width: 78%; height: 78%; animation: spin 12s linear infinite reverse; }
+
+.orbitIcon, .orbitIconSm {
+  position: absolute;
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+}
+.orbitIcon   { width: 44px; height: 44px; border-radius: 12px; font-size: 1.2rem; animation: counter-spin 18s linear infinite; }
+.orbitIconSm { width: 36px; height: 36px; border-radius: 10px; font-size: 1rem;   animation: counter-spin 12s linear infinite; }
+
+.pos0 { top: -22px;    left: calc(50% - 22px); }
+.pos1 { bottom: -22px; left: calc(50% - 22px); }
+.pos2 { left: -22px;   top: calc(50% - 22px);  }
+.pos3 { right: -22px;  top: calc(50% - 22px);  }
+
+.posInner0 { top: -18px;    left: calc(50% - 18px); }
+.posInner1 { bottom: -18px; left: calc(50% - 18px); }
+.posInner2 { left: -18px;   top: calc(50% - 18px);  }
+.posInner3 { right: -18px;  top: calc(50% - 18px);  }
+
+.centerImg {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent);
+  box-shadow: 0 0 0 8px rgba(124, 58, 237, 0.1), var(--shadow-lg);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .grid         { grid-template-columns: 1fr; gap: 3rem; }
+  .visual       { height: 300px; }
+  .orbitWrapper { width: 240px; height: 240px; }
+  .centerImg    { width: 120px; height: 120px; }
+}
+@media (max-width: 640px) {
+  .blob1, .blob2 { display: none; }
+  .name { font-size: 2.2rem; }
+}

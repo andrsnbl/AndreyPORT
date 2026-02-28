@@ -1,0 +1,67 @@
+/* ── Testimonial.module.css ── */
+
+.testimonial { scroll-margin-top: 80px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+/* Kartu */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Tanda kutip besar */
+.quote {
+  font-family: Georgia, serif;
+  font-size: 3rem;
+  line-height: 0.8;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+/* Foto + nama */
+.author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.author img {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+}
+.author h6 {
+  font-size: 0.875rem;
+  margin-bottom: 0.1rem;
+}
+.author span {
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+}

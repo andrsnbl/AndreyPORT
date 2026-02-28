@@ -1,0 +1,87 @@
+/* ── About.module.css ── */
+
+.about { scroll-margin-top: 80px; }
+
+/* Grid dua kolom */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* Foto */
+.imgWrap {
+  position: relative;
+  border-radius: var(--radius);
+}
+.imgWrap img {
+  width: 100%;
+  border-radius: var(--radius);
+  object-fit: cover;
+  box-shadow: var(--shadow);
+}
+
+/* Badge "25+ Projects" */
+.badge {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  background: var(--accent);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+}
+.badgeNum   { display: block; font-size: 2rem; line-height: 1; }
+.badgeLabel { display: block; font-size: 0.72rem; opacity: 0.85; margin-top: 2px; }
+
+/* Info pribadi */
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 2rem;
+  margin: 1.5rem 0;
+}
+.infoItem        { font-size: 0.875rem; color: var(--text2); }
+.infoItem strong { display: block; color: var(--text); font-weight: 600; font-size: 0.8rem; }
+
+/* Tombol */
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+/* Kartu statistik */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+.statCard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.statCard:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.statIcon  { display: block; font-size: 1.5rem; margin-bottom: 0.5rem; }
+.statNum   { display: block; font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); }
+.statLabel { display: block; font-size: 0.75rem; color: var(--text2); margin-top: 4px; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .grid       { grid-template-columns: 1fr; gap: 3rem; }
+  .statsRow   { grid-template-columns: repeat(2, 1fr); }
+  .badge      { bottom: -12px; right: -12px; }
+}
+@media (max-width: 640px) {
+  .statsRow   { grid-template-columns: repeat(2, 1fr); }
+  .infoGrid   { grid-template-columns: 1fr; }
+}

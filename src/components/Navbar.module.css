@@ -1,0 +1,145 @@
+/* ── Navbar.module.css ── */
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 64px;
+  padding: 0 2rem;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background var(--transition);
+}
+
+/* Logo */
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  text-decoration: none;
+}
+.logo span { color: var(--accent); }
+
+/* Desktop links */
+.navLinks {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.navLinks a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text2);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition);
+}
+.navLinks a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 2px;
+  background: var(--accent);
+  transition: width var(--transition);
+}
+.navLinks a:hover::after,
+.navLinks a.active::after { width: 100%; }
+.navLinks a:hover,
+.navLinks a.active { color: var(--accent); }
+
+/* Kiri: theme + hamburger */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.themeBtn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+.themeBtn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+
+/* Mobile menu */
+.mobileMenu {
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  z-index: 99;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.75rem;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: all var(--transition);
+}
+.mobileMenu.show {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+}
+.mobileMenu a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition);
+}
+.mobileMenu a:hover { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hamburger { display: flex; }
+}
+.langBtn {
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.langBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}

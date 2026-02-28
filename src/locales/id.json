@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "resume": "Resume",
+    "services": "Layanan",
+    "portfolio": "Portfolio",
+    "clients": "Klien",
+    "blog": "Blog",
+    "contact": "Kontak"
+  },
+  "hero": {
+    "available": "Tersedia untuk Proyek Freelance",
+    "greeting": "SAYA",
+    "desc": "Fresh graduate pengembangan web dengan fondasi kuat dalam desain & pengembangan. Berbasis di Medan, Indonesia.",
+    "downloadCV": "⬇ Unduh CV",
+    "getInTouch": "Hubungi Saya →",
+    "stats": {
+      "projects": "Proyek",
+      "clients": "Klien",
+      "years": "Tahun",
+      "services": "Layanan"
+    }
+  },
+  "about": {
+    "tag": "Tentang Saya",
+    "title": "Halo, Saya",
+    "desc": "Seorang web designer dan developer yang bersemangat dari Medan, Indonesia. Lulusan Sistem Informasi dengan pengalaman langsung di UI/UX, desain grafis, dan pengembangan web.",
+    "badge": "Proyek Selesai",
+    "downloadCV": "⬇ Unduh CV",
+    "sendEmail": "✉ Kirim Email",
+    "infoKeys": {
+      "birthday": "Tanggal Lahir",
+      "age": "Usia",
+      "degree": "Jurusan",
+      "freelance": "Freelance",
+      "location": "Lokasi",
+      "email": "Email"
+    },
+    "stats": {
+      "downloads": "Unduhan",
+      "projects": "Proyek",
+      "awards": "Penghargaan",
+      "clients": "Klien"
+    }
+  },
+  "resume": {
+    "tag": "Resume",
+    "title": "Resume Saya",
+    "subtitle": "Saya tersedia untuk proyek freelance",
+    "education": "Pendidikan",
+    "experience": "Pengalaman",
+    "skillsTitle": "Keahlian Teknis"
+  },
+  "services": {
+    "tag": "Yang Saya Lakukan",
+    "title": "Layanan Saya",
+    "subtitle": "Layanan yang saya tawarkan kepada klien"
+  },
+  "portfolio": {
+    "tag": "Karya Saya",
+    "title": "Karya Kreatif",
+    "subtitle": "Lihat karya-karya terbaik saya",
+    "filters": {
+      "all": "Semua",
+      "webdesign": "Web Design",
+      "mobiledesign": "Mobile Design",
+      "seo": "SEO",
+      "graphic": "Grafis"
+    }
+  },
+  "testimonial": {
+    "tag": "Testimoni",
+    "title": "Klien Saya",
+    "subtitle": "Apa yang klien saya katakan"
+  },
+  "blog": {
+    "tag": "Blog",
+    "title": "Berita Terbaru",
+    "subtitle": "Lihat artikel blog terbaru saya",
+    "by": "oleh Andrey",
+    "readMore": "Baca Selengkapnya →",
+    "label": "Artikel Blog"
+  },
+  "contact": {
+    "tag": "Kontak",
+    "title": "Hubungi Saya",
+    "subtitle": "Jangan ragu untuk menghubungi saya kapan saja",
+    "colLeft": "Mari Bekerja Sama",
+    "colLeftDesc": "Fresh graduate pengembangan web dengan fondasi kuat dalam HTML/CSS/JavaScript. Mencari kesempatan untuk berkontribusi sambil belajar dari developer berpengalaman.",
+    "colRight": "Bagaimana Saya Bisa Membantu?",
+    "labels": {
+      "address": "Alamat",
+      "phone": "Telepon",
+      "email": "Email"
+    },
+    "form": {
+      "name": "Nama Lengkap",
+      "namePh": "Andrey Julius",
+      "email": "Alamat Email",
+      "emailPh": "kamu@contoh.com",
+      "message": "Pesan",
+      "messagePh": "Ceritakan tentang proyekmu...",
+      "send": "✉ Kirim Pesan",
+      "sending": "⏳ Mengirim...",
+      "success": "✅ Pesan terkirim! Saya akan segera membalas.",
+      "error": "⚠️ Mohon isi semua kolom dengan benar."
+    }
+  },
+  "footer": {
+    "copy": "Dibuat dengan React. Hak cipta dilindungi."
+  }
+}
