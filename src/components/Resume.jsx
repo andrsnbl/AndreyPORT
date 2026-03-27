@@ -5,9 +5,11 @@
 
 import { useEffect, useRef } from 'react'
 import { EDUCATION, EXPERIENCE, SKILLS } from '../data/portfolioData'
+import { useTranslation } from 'react-i18next'
 import styles from './Resume.module.css'
 
 export default function Resume() {
+  const { t } = useTranslation()
   const skillsRef = useRef(null)
 
   // Animasikan skill bar ketika section masuk viewport
@@ -31,22 +33,24 @@ export default function Resume() {
       <div className={styles.inner}>
 
         {/* Header section */}
-        <span className="section-tag fade-in">Resume</span>
-        <h2 className={`section-title fade-in fade-in-delay-1`}>My <span>Resume</span></h2>
-        <p className={`section-sub fade-in fade-in-delay-1`}>I am available for freelance projects</p>
+        <span className="section-tag fade-in">{t('resume.tag', { defaultValue: 'Resume' })}</span>
+        <h2 className={`section-title fade-in fade-in-delay-1`}>
+          {t('resume.title', { defaultValue: 'My Resume' }).split(' ')[0]} <span>{t('resume.title', { defaultValue: 'My Resume' }).split(' ').slice(1).join(' ')}</span>
+        </h2>
+        <p className={`section-sub fade-in fade-in-delay-1`}>{t('resume.subtitle', { defaultValue: 'I am available for freelance projects' })}</p>
 
         {/* Grid dua kolom: pendidikan | pengalaman */}
         <div className={styles.grid}>
 
           {/* Pendidikan */}
           <div className={`${styles.col} fade-in`}>
-            <h3 className={styles.colTitle}><span>🎓</span> Education</h3>
+            <h3 className={styles.colTitle}><span>🎓</span> {t('resume.education', { defaultValue: 'Education' })}</h3>
             <ul className={styles.timeline}>
               {EDUCATION.map((item) => (
-                <li key={item.title} className={styles.timelineItem}>
-                  <h6>{item.title}</h6>
+                <li key={item.key} className={styles.timelineItem}>
+                  <h6>{t(`resume.edu.${item.key}.title`, { defaultValue: item.key })}</h6>
                   <span className={styles.period}>📅 {item.period}</span>
-                  <p>{item.desc}</p>
+                  <p>{t(`resume.edu.${item.key}.desc`, { defaultValue: '' })}</p>
                 </li>
               ))}
             </ul>
@@ -54,13 +58,13 @@ export default function Resume() {
 
           {/* Pengalaman */}
           <div className={`${styles.col} fade-in fade-in-delay-1`}>
-            <h3 className={styles.colTitle}><span>💼</span> Experience</h3>
+            <h3 className={styles.colTitle}><span>💼</span> {t('resume.experience', { defaultValue: 'Experience' })}</h3>
             <ul className={styles.timeline}>
               {EXPERIENCE.map((item) => (
-                <li key={item.title} className={styles.timelineItem}>
-                  <h6>{item.title}</h6>
+                <li key={item.key} className={styles.timelineItem}>
+                  <h6>{t(`resume.exp.${item.key}.title`, { defaultValue: item.key })}</h6>
                   <span className={styles.period}>📅 {item.period}</span>
-                  <p>{item.desc}</p>
+                  <p>{t(`resume.exp.${item.key}.desc`, { defaultValue: '' })}</p>
                 </li>
               ))}
             </ul>
@@ -69,7 +73,7 @@ export default function Resume() {
 
         {/* Skill bars */}
         <div ref={skillsRef} className={`${styles.skills} fade-in`}>
-          <h2 className="section-title">Technical <span>Skills</span></h2>
+          <h2 className="section-title">{t('resume.skillsTitle', { defaultValue: 'Technical Skills' }).split(' ')[0]} <span>{t('resume.skillsTitle', { defaultValue: 'Technical Skills' }).split(' ').slice(1).join(' ')}</span></h2>
           <div className={styles.skillsGrid}>
             {SKILLS.map((skill) => (
               <div key={skill.name} className={styles.skillItem}>

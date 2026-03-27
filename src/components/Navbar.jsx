@@ -12,6 +12,9 @@ export default function Navbar({ dark, toggleDark }) {
   const [menuOpen,      setMenuOpen]      = useState(false)
   const { t, i18n } = useTranslation()
   const currentLang = i18n.language
+  const getNavLabel = (key) => {
+    return t(`nav.${key}`, { defaultValue: key })
+  }
 
   const toggleLang = () => {
   const next = currentLang === 'id' ? 'en' : 'id'
@@ -54,7 +57,7 @@ export default function Navbar({ dark, toggleDark }) {
                 href={link.href}
                 className={activeSection === link.href.replace('#', '') ? styles.active : ''}
               >
-                {link.label}
+                {getNavLabel(link.key)}
               </a>
             </li>
           ))}
@@ -96,7 +99,7 @@ export default function Navbar({ dark, toggleDark }) {
             href={link.href}
             onClick={() => setMenuOpen(false)}
           >
-            {link.label}
+            {getNavLabel(link.key)}
           </a>
         ))}
       </div>

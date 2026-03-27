@@ -20,3 +20,14 @@
   text-decoration: none;
 }
 .sub a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 1.25rem 0.9rem;
+    font-size: 0.8rem;
+  }
+  .sub {
+    font-size: 0.73rem;
+    line-height: 1.6;
+  }
+}

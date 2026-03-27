@@ -84,4 +84,21 @@
 @media (max-width: 640px) {
   .statsRow   { grid-template-columns: repeat(2, 1fr); }
   .infoGrid   { grid-template-columns: 1fr; }
+  .badge {
+    position: static;
+    margin-top: 0.75rem;
+    width: fit-content;
+  }
+  .actions {
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+  }
+  .statCard {
+    padding: 1rem 0.75rem;
+  }
+  .statNum { font-size: 1.5rem; }
+}
+
+@media (max-width: 420px) {
+  .statsRow { grid-template-columns: 1fr; }
 }

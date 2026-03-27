@@ -5,9 +5,11 @@
 
 import { useState } from 'react'
 import { CONTACT_INFO, SOCIAL_LINKS, EMAILJS_CONFIG } from '../data/portfolioData'
+import { useTranslation } from 'react-i18next'
 import styles from './Contact.module.css'
 
 export default function Contact() {
+  const { t } = useTranslation()
   // State form
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   // Status: '' | 'loading' | 'success' | 'error'
@@ -56,9 +58,9 @@ export default function Contact() {
   return (
     <section id="contact" className={styles.contact}>
 
-      <span className="section-tag fade-in">Contact</span>
-      <h2 className={`section-title fade-in fade-in-delay-1`}>Get <span>In Touch</span></h2>
-      <p className={`section-sub fade-in fade-in-delay-1`}>Feel free to contact me any time</p>
+      <span className="section-tag fade-in">{t('contact.tag', { defaultValue: 'Contact' })}</span>
+      <h2 className={`section-title fade-in fade-in-delay-1`}>{t('contact.title', { defaultValue: 'Get In Touch' }).split(' ')[0]} <span>{t('contact.title', { defaultValue: 'Get In Touch' }).split(' ').slice(1).join(' ')}</span></h2>
+      <p className={`section-sub fade-in fade-in-delay-1`}>{t('contact.subtitle', { defaultValue: 'Feel free to contact me any time' })}</p>
 
       {/* Peta Medan */}
       <div className={`${styles.mapWrap} fade-in`}>
@@ -79,17 +81,21 @@ export default function Contact() {
 
         {/* Kolom kiri: info kontak */}
         <div className={`fade-in`}>
-          <h3 className={styles.colTitle}>Let's Work Together</h3>
+          <h3 className={styles.colTitle}>{t('contact.colLeft', { defaultValue: "Let's Work Together" })}</h3>
           <p className={styles.colDesc}>
-            Fresh web development graduate with solid foundation in HTML/CSS/JavaScript.
-            Looking for opportunities to contribute while learning from experienced developers.
+            {t('contact.colLeftDesc', {
+              defaultValue:
+                'Fresh web development graduate with solid foundation in HTML/CSS/JavaScript. Looking for opportunities to contribute while learning from experienced developers.',
+            })}
           </p>
 
           {CONTACT_INFO.map((item) => (
-            <div key={item.label} className={styles.infoItem}>
+            <div key={item.key} className={styles.infoItem}>
               <div className={styles.infoIcon}>{item.icon}</div>
               <div>
-                <span className={styles.infoLabel}>{item.label}</span>
+                <span className={styles.infoLabel}>
+                  {t(`contact.labels.${item.key}`, { defaultValue: item.key })}
+                </span>
                 <p className={styles.infoValue}>{item.value}</p>
               </div>
             </div>
@@ -114,17 +120,17 @@ export default function Contact() {
 
         {/* Kolom kanan: form */}
         <div className={`fade-in fade-in-delay-2`}>
-          <h3 className={styles.colTitle}>How Can I Help You?</h3>
+          <h3 className={styles.colTitle}>{t('contact.colRight', { defaultValue: 'How Can I Help You?' })}</h3>
 
           <form onSubmit={handleSubmit} className={styles.form}>
             {/* Nama */}
             <div className={styles.formGroup}>
-              <label htmlFor="name">Your Name</label>
+              <label htmlFor="name">{t('contact.form.name', { defaultValue: 'Your Name' })}</label>
               <input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Andrey Julius"
+                placeholder={t('contact.form.namePh', { defaultValue: 'Andrey Julius' })}
                 value={form.name}
                 onChange={handleChange}
                 className={styles.input}
@@ -133,12 +139,12 @@ export default function Contact() {
 
             {/* Email */}
             <div className={styles.formGroup}>
-              <label htmlFor="email">Email Address</label>
+              <label htmlFor="email">{t('contact.form.email', { defaultValue: 'Email Address' })}</label>
               <input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder={t('contact.form.emailPh', { defaultValue: 'you@example.com' })}
                 value={form.email}
                 onChange={handleChange}
                 className={styles.input}
@@ -147,12 +153,12 @@ export default function Contact() {
 
             {/* Pesan */}
             <div className={styles.formGroup}>
-              <label htmlFor="message">Message</label>
+              <label htmlFor="message">{t('contact.form.message', { defaultValue: 'Message' })}</label>
               <textarea
                 id="message"
                 name="message"
                 rows={4}
-                placeholder="Tell me about your project..."
+                placeholder={t('contact.form.messagePh', { defaultValue: 'Tell me about your project...' })}
                 value={form.message}
                 onChange={handleChange}
                 className={styles.input}
@@ -160,18 +166,20 @@ export default function Contact() {
             </div>
 
             <button type="submit" className={`btn-primary ${styles.submitBtn}`}>
-              {status === 'loading' ? '⏳ Sending...' : '✉ Send Message'}
+              {status === 'loading'
+                ? t('contact.form.sending', { defaultValue: '⏳ Sending...' })
+                : t('contact.form.send', { defaultValue: '✉ Send Message' })}
             </button>
 
             {/* Pesan status */}
             {status === 'success' && (
               <div className={`${styles.statusMsg} ${styles.success}`}>
-                ✅ Message sent! I'll get back to you soon.
+                {t('contact.form.success', { defaultValue: "✅ Message sent! I'll get back to you soon." })}
               </div>
             )}
             {status === 'error' && (
               <div className={`${styles.statusMsg} ${styles.error}`}>
-                ⚠️ Please fill in all fields correctly.
+                {t('contact.form.error', { defaultValue: '⚠️ Please fill in all fields correctly.' })}
               </div>
             )}
           </form>

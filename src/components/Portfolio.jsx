@@ -1,33 +1,44 @@
-// ─────────────────────────────────────────────────────────────
-//  Portfolio.jsx
-//  Section portfolio: filter karya + grid gambar + lightbox
-// ─────────────────────────────────────────────────────────────
-
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { PORTFOLIO_ITEMS, PORTFOLIO_FILTERS } from '../data/portfolioData'
 import styles from './Portfolio.module.css'
 
 export default function Portfolio() {
-  // Kategori yang dipilih untuk filter
+  const { t, i18n } = useTranslation()
+  const lang = i18n.language || 'id'
   const [activeFilter, setActiveFilter] = useState('all')
-  // URL gambar yang sedang dibuka di lightbox (null = tutup)
-  const [lightboxImg, setLightboxImg] = useState(null)
+  const [lightboxImg,  setLightboxImg]  = useState(null)
 
-  // Saring item sesuai filter aktif
-  const visibleItems =
+  // Item yang tampil sesuai filter
+  const visible =
     activeFilter === 'all'
       ? PORTFOLIO_ITEMS
       : PORTFOLIO_ITEMS.filter((item) => item.cat === activeFilter)
 
+  // Label filter dari file bahasa, key dari portfolioData
+  // Fallback ke label default jika t belum siap
+  const getFilterLabel = (key) => {
+    const label = t(`portfolio.filters.${key}`, { defaultValue: key })
+    return label || key
+  }
+
   return (
     <section id="portfolio" className={styles.portfolio}>
       <div className={styles.inner}>
+        <span className="section-tag fade-in">
+          {t('portfolio.tag', { defaultValue: 'My Work' })}
+        </span>
+        <h2 className="section-title fade-in fade-in-delay-1">
+          {(t('portfolio.title', { defaultValue: 'Creative Works' })).split(' ')[0]}{' '}
+          <span>
+            {(t('portfolio.title', { defaultValue: 'Creative Works' })).split(' ').slice(1).join(' ')}
+          </span>
+        </h2>
+        <p className="section-sub fade-in fade-in-delay-1">
+          {t('portfolio.subtitle', { defaultValue: 'Meet my awesome works and enjoy' })}
+        </p>
 
-        <span className="section-tag fade-in">My Work</span>
-        <h2 className={`section-title fade-in fade-in-delay-1`}>Creative <span>Works</span></h2>
-        <p className={`section-sub fade-in fade-in-delay-1`}>Meet my awesome works and enjoy</p>
-
-        {/* Tombol filter */}
+        {/* ── Tombol Filter — pakai PORTFOLIO_FILTERS dari data ── */}
         <div className={`${styles.filters} fade-in fade-in-delay-2`}>
           {PORTFOLIO_FILTERS.map((f) => (
             <button
@@ -35,37 +46,45 @@ export default function Portfolio() {
               className={`${styles.filterBtn} ${activeFilter === f.key ? styles.active : ''}`}
               onClick={() => setActiveFilter(f.key)}
             >
-              {f.label}
+              {getFilterLabel(f.key)}
             </button>
           ))}
         </div>
 
-        {/* Grid gambar */}
+        {/* ── Grid Karya ── */}
         <div className={styles.grid}>
-          {visibleItems.map((item, i) => (
+          {visible.map((item, i) => (
             <div
-              key={item.img + i}
-              className={`${styles.item} fade-in`}
+              key={`${activeFilter}-${i}`}
+              className={styles.item}
               onClick={() => setLightboxImg(item.img)}
             >
               <img src={item.img} alt={item.title} loading="lazy" />
-              {/* Overlay muncul saat hover */}
               <div className={styles.overlay}>
                 <h5>{item.title}</h5>
-                <span>{PORTFOLIO_FILTERS.find((f) => f.key === item.cat)?.label}</span>
+                <span>{getFilterLabel(item.cat)}</span>
               </div>
             </div>
           ))}
         </div>
+
+        {/* ── Pesan jika kategori kosong ── */}
+        {visible.length === 0 && (
+          <p className={styles.empty}>
+            {lang === 'id'
+              ? 'Tidak ada karya di kategori ini.'
+              : 'No works found in this category.'}
+          </p>
+        )}
       </div>
 
-      {/* Lightbox — klik di luar gambar untuk tutup */}
+      {/* ── Lightbox ── */}
       {lightboxImg && (
         <div className="lightbox" onClick={() => setLightboxImg(null)}>
           <button className="lightbox-close">✕</button>
           <img
             src={lightboxImg}
-            alt="Portfolio item"
+            alt="portfolio"
             onClick={(e) => e.stopPropagation()}
           />
         </div>

@@ -32,3 +32,13 @@
 }
 
 .btn:hover { transform: translateY(-4px); }
+
+@media (max-width: 640px) {
+  .btn {
+    width: 42px;
+    height: 42px;
+    right: 0.9rem;
+    bottom: 1rem;
+    font-size: 1rem;
+  }
+}

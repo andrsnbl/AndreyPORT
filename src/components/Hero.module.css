@@ -148,12 +148,39 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .hero         { min-height: auto; padding: 6.2rem 1.5rem 3rem !important; }
   .grid         { grid-template-columns: 1fr; gap: 3rem; }
   .visual       { height: 300px; }
   .orbitWrapper { width: 240px; height: 240px; }
   .centerImg    { width: 120px; height: 120px; }
 }
 @media (max-width: 640px) {
+  .hero { padding: 5.4rem 1rem 2.2rem !important; }
   .blob1, .blob2 { display: none; }
-  .name { font-size: 2.2rem; }
+  .name { font-size: 2rem; }
+  .typed { font-size: 1.03rem; }
+  .desc { max-width: 100%; font-size: 0.94rem; margin-bottom: 1.5rem; }
+  .cta { margin-bottom: 1.4rem; gap: 0.72rem; }
+  .stats { gap: 1rem; justify-content: space-between; }
+  .statItem { min-width: 40%; }
+  .statNum { font-size: 1.35rem; }
+  .visual { height: 255px; }
+  .orbitWrapper { width: 210px; height: 210px; }
+  .orbitIcon { width: 38px; height: 38px; font-size: 1rem; }
+  .orbitIconSm { width: 30px; height: 30px; font-size: 0.85rem; }
+  .pos0 { top: -19px; left: calc(50% - 19px); }
+  .pos1 { bottom: -19px; left: calc(50% - 19px); }
+  .pos2 { left: -19px; top: calc(50% - 19px); }
+  .pos3 { right: -19px; top: calc(50% - 19px); }
+  .posInner0 { top: -15px; left: calc(50% - 15px); }
+  .posInner1 { bottom: -15px; left: calc(50% - 15px); }
+  .posInner2 { left: -15px; top: calc(50% - 15px); }
+  .posInner3 { right: -15px; top: calc(50% - 15px); }
+  .centerImg { width: 105px; height: 105px; }
+}
+
+@media (max-width: 420px) {
+  .stats { gap: 0.85rem; }
+  .statItem { min-width: 46%; }
+  .statLabel { font-size: 0.66rem; }
 }

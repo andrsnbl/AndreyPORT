@@ -90,5 +90,14 @@
   .grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
-  .grid { grid-template-columns: 1fr; }
+  .blog { padding: 4rem 1rem !important; }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .card img { height: 165px; }
+  .body { padding: 1rem; }
+  .modalTitle { font-size: 1.15rem; }
+  .modalContent { font-size: 0.86rem; line-height: 1.7; }
 }

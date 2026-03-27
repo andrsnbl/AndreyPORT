@@ -5,9 +5,11 @@
 
 import { useState } from 'react'
 import { BLOG_POSTS } from '../data/portfolioData'
+import { useTranslation } from 'react-i18next'
 import styles from './Blog.module.css'
 
 export default function Blog() {
+  const { t } = useTranslation()
   // Post yang sedang dibuka di modal (null = tutup)
   const [openPost, setOpenPost] = useState(null)
 
@@ -15,25 +17,25 @@ export default function Blog() {
     <section id="blog" className={styles.blog}>
       <div className={styles.inner}>
 
-        <span className="section-tag fade-in">Blog</span>
-        <h2 className={`section-title fade-in fade-in-delay-1`}>Latest <span>News</span></h2>
-        <p className={`section-sub fade-in fade-in-delay-1`}>Check out my latest blog posts</p>
+        <span className="section-tag fade-in">{t('blog.tag', { defaultValue: 'Blog' })}</span>
+        <h2 className={`section-title fade-in fade-in-delay-1`}>{t('blog.title', { defaultValue: 'Latest News' }).split(' ')[0]} <span>{t('blog.title', { defaultValue: 'Latest News' }).split(' ').slice(1).join(' ')}</span></h2>
+        <p className={`section-sub fade-in fade-in-delay-1`}>{t('blog.subtitle', { defaultValue: 'Check out my latest blog posts' })}</p>
 
         {/* Grid kartu blog */}
         <div className={styles.grid}>
           {BLOG_POSTS.map((post, i) => (
-            <div key={post.title} className={`${styles.card} fade-in fade-in-delay-${i + 1}`}>
-              <img src={post.img} alt={post.title} loading="lazy" />
+            <div key={post.key} className={`${styles.card} fade-in fade-in-delay-${i + 1}`}>
+              <img src={post.img} alt={t(`blog.posts.${post.key}.title`, { defaultValue: post.key })} loading="lazy" />
               <div className={styles.body}>
-                <div className={styles.meta}>by Andrey</div>
+                <div className={styles.meta}>{t('blog.by', { defaultValue: 'by Andrey' })}</div>
                 <h5>
                   <button onClick={() => setOpenPost(post)}>
-                    {post.title}
+                    {t(`blog.posts.${post.key}.title`, { defaultValue: post.key })}
                   </button>
                 </h5>
-                <p>{post.excerpt}</p>
+                <p>{t(`blog.posts.${post.key}.excerpt`, { defaultValue: '' })}</p>
                 <button className={styles.readMore} onClick={() => setOpenPost(post)}>
-                  Read More →
+                  {t('blog.readMore', { defaultValue: 'Read More →' })}
                 </button>
               </div>
             </div>
@@ -47,11 +49,11 @@ export default function Blog() {
         <div className="modal-overlay" onClick={() => setOpenPost(null)}>
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setOpenPost(null)}>✕</button>
-            <span className="section-tag">Blog Post</span>
-            <h4 className={styles.modalTitle}>{openPost.title}</h4>
-            <div className={styles.modalMeta}>by Andrey</div>
-            <img src={openPost.img} alt={openPost.title} className={styles.modalImg} />
-            <p className={styles.modalContent}>{openPost.content}</p>
+            <span className="section-tag">{t('blog.label', { defaultValue: 'Blog Post' })}</span>
+            <h4 className={styles.modalTitle}>{t(`blog.posts.${openPost.key}.title`, { defaultValue: openPost.key })}</h4>
+            <div className={styles.modalMeta}>{t('blog.by', { defaultValue: 'by Andrey' })}</div>
+            <img src={openPost.img} alt={t(`blog.posts.${openPost.key}.title`, { defaultValue: openPost.key })} className={styles.modalImg} />
+            <p className={styles.modalContent}>{t(`blog.posts.${openPost.key}.content`, { defaultValue: '' })}</p>
           </div>
         </div>
       )}

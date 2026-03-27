@@ -50,12 +50,62 @@
     "subtitle": "I am available for freelance projects",
     "education": "Education",
     "experience": "Experience",
-    "skillsTitle": "Technical Skills"
+    "skillsTitle": "Technical Skills",
+    "edu": {
+      "infoSystems": {
+        "title": "Bachelor in Information Systems",
+        "desc": "Graduated from STMK Triguna Dharma Medan with GPA 3.71/4.00. Focused on information systems, web development, and software engineering."
+      },
+      "mikroskil": {
+        "title": "Universitas Mikroskil",
+        "desc": "Built a strong foundation before pivoting to professional work experience in design and development."
+      }
+    },
+    "exp": {
+      "adminGraphic": {
+        "title": "Administrative & Graphic Design",
+        "desc": "Working at a construction planning firm — creating graphic designs, handling admin tasks, and assisting in site surveys."
+      },
+      "salesSocial": {
+        "title": "Sales & Social Media Admin",
+        "desc": "Managed social media sales accounts (live selling), tracked payments, and handled inventory for a secondhand shoe store."
+      },
+      "sysadminIntern": {
+        "title": "Sysadmin & Cybersecurity Intern — Infinite Learning / IBM",
+        "desc": "Hands-on experience managing IT systems, exploring AI concepts, and studying ethical hacking."
+      },
+      "uiuxIntern": {
+        "title": "Web Design & UI/UX Intern — PT. GLU",
+        "desc": "Created responsive web layouts at a Medan-based startup, collaborating with developers and product teams."
+      },
+      "juniorFreelance": {
+        "title": "Junior Web Developer — Freelance",
+        "desc": "Handled website projects for individual and small business clients across various industries."
+      }
+    }
   },
   "services": {
     "tag": "What I Do",
     "title": "My Services",
-    "subtitle": "Services I offer to my clients"
+    "subtitle": "Services I offer to my clients",
+    "items": {
+      "graphicDesign": {
+        "title": "Graphic Design",
+        "desc": "Creative visual solutions for branding, marketing materials, and digital assets with attention-grabbing aesthetics."
+      },
+      "portfolioWorks": {
+        "title": "Portfolio of Works",
+        "desc": "Curated showcase of completed projects demonstrating expertise and diverse capabilities across industries."
+      },
+      "responsiveTheme": {
+        "title": "Responsive Theme",
+        "desc": "Fully adaptive websites that deliver optimal viewing experience across all devices, from desktop to mobile."
+      },
+      "goBeyondLimits": {
+        "title": "Go Beyond Limits",
+        "desc": "Innovative solutions pushing boundaries through cutting-edge technologies and unconventional approaches."
+      }
+    }
   },
   "portfolio": {
     "tag": "My Work",
@@ -72,7 +122,29 @@
   "testimonial": {
     "tag": "Testimonials",
     "title": "My Clients",
-    "subtitle": "What my clients say about me"
+    "subtitle": "What my clients say about me",
+    "items": {
+      "jane": {
+        "name": "Jane Doe",
+        "role": "SEO Manager",
+        "quote": "In a professional context it often happens that private or corporate clients order a publication to be made. Andrey delivered exceptional results."
+      },
+      "andrey": {
+        "name": "Andrey",
+        "role": "UI Designer",
+        "quote": "Andrey is a talented designer with great attention to detail. The project was delivered on time and exceeded our expectations."
+      },
+      "jully": {
+        "name": "Jully Doe",
+        "role": "UX Designer",
+        "quote": "Working with Andrey was a great experience. His design sense and technical knowledge are top notch."
+      },
+      "mike": {
+        "name": "Mike Smith",
+        "role": "Product Manager",
+        "quote": "Highly recommended! Andrey brought creative ideas and professional execution to our project."
+      }
+    }
   },
   "blog": {
     "tag": "Blog",
@@ -80,7 +152,24 @@
     "subtitle": "Check out my latest blog posts",
     "by": "by Andrey",
     "readMore": "Read More →",
-    "label": "Blog Post"
+    "label": "Blog Post",
+    "posts": {
+      "bestVersion": {
+        "title": "Be Your Best Version",
+        "excerpt": "Focus on your strengths, work on your weaknesses, and always keep learning.",
+        "content": "The journey to self-improvement is lifelong and rewarding. Focus on your strengths, work on your weaknesses, and always keep learning. Writing down your goals creates accountability and gives you a roadmap to follow. Start small, stay consistent, and celebrate every milestone along the way."
+      },
+      "tipsUiUx": {
+        "title": "5 Tips In UI/UX Web Design",
+        "excerpt": "Always put the user first. Keep it simple, intuitive, and accessible to everyone.",
+        "content": "1. Always put the user first.\n2. Keep it simple and intuitive.\n3. Use consistent design patterns.\n4. Make it accessible to everyone.\n5. Test, iterate, and improve.\n\nGood UI/UX design is not just about aesthetics — it is about creating experiences that delight and empower users."
+      },
+      "writeDreams": {
+        "title": "Write Your Dreams",
+        "excerpt": "Writing down your dreams and goals is one of the most powerful habits you can develop.",
+        "content": "Writing down your dreams and goals is one of the most powerful habits you can develop. It forces clarity of thought, creates accountability, and gives you a clear roadmap to follow. Start with small dreams and work your way up. The act of writing transforms abstract wishes into concrete plans."
+      }
+    }
   },
   "contact": {
     "tag": "Contact",

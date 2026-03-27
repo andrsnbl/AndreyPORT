@@ -111,3 +111,16 @@
   .grid       { grid-template-columns: 1fr; gap: 3rem; }
   .skillsGrid { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 640px) {
+  .resume { padding: 4rem 1rem !important; }
+  .grid { margin-top: 2rem; gap: 2rem; }
+  .colTitle { font-size: 1.05rem; }
+  .timelineItem {
+    padding: 0 0 1.5rem 2rem;
+  }
+  .timelineItem h6 { font-size: 0.9rem; }
+  .timelineItem p { font-size: 0.82rem; }
+  .skills { margin-top: 2.4rem; }
+  .skillsGrid { margin-top: 1.25rem; gap: 0.95rem; }
+}

@@ -1,111 +1,78 @@
-// ─────────────────────────────────────────────────────────────
-//  portfolioData.js
-//  Semua data konten portfolio disimpan di sini.
-//  Jika ingin mengubah teks, cukup edit file ini saja.
-// ─────────────────────────────────────────────────────────────
+// Data non-translatable (angka, key, asset path, link)
 
-/**
- * Menghitung umur otomatis dari string tanggal lahir.
- * Format contoh: 'July 1999' atau '1 July 1999'
- */
-function getAgeFromBirthday(birthdayStr) {
-  const match = birthdayStr.match(/(\w+)\s+(\d{4})/)
-  if (!match) return null
-  const [, monthStr, yearStr] = match
-  const birthYear = parseInt(yearStr, 10)
-  const birthMonth = new Date(`${monthStr} 1, ${birthYear}`).getMonth()
-  const today = new Date()
-  let age = today.getFullYear() - birthYear
-  if (today.getMonth() < birthMonth) age--
-  return age.toString()
-}
-
-// Navigasi
 export const NAV_LINKS = [
-  { href: '#hero',        label: 'Home'     },
-  { href: '#about',       label: 'About'    },
-  { href: '#resume',      label: 'Resume'   },
-  { href: '#services',    label: 'Services' },
-  { href: '#portfolio',   label: 'Portfolio'},
-  { href: '#testimonial', label: 'Clients'  },
-  { href: '#blog',        label: 'Blog'     },
-  { href: '#contact',     label: 'Contact'  },
+  { href: '#hero', key: 'home' },
+  { href: '#about', key: 'about' },
+  { href: '#resume', key: 'resume' },
+  { href: '#services', key: 'services' },
+  { href: '#portfolio', key: 'portfolio' },
+  { href: '#testimonial', key: 'clients' },
+  { href: '#blog', key: 'blog' },
+  { href: '#contact', key: 'contact' },
 ]
 
-// Hero — kata-kata yang diketik otomatis
 export const TYPED_WORDS = [
   'UI Designer.',
   'Web Designer.',
   'Web Developer.',
 ]
 
-// Hero — statistik singkat
 export const HERO_STATS = [
-  { number: '25+', label: 'Projects' },
-  { number: '27+', label: 'Clients'  },
-  { number: '2+',  label: 'Years'    },
-  { number: '4',   label: 'Services' },
+  { number: '25+', key: 'projects' },
+  { number: '27+', key: 'clients' },
+  { number: '2+', key: 'years' },
+  { number: '4', key: 'services' },
 ]
 
-// About — informasi pribadi (Age dihitung otomatis dari Birthday)
-const BIRTHDAY = 'July 1999'
 export const ABOUT_INFO = [
-  { key: 'Birthday',  value: BIRTHDAY                  },
-  { key: 'Age',       value: getAgeFromBirthday(BIRTHDAY) ?? '25' },
-  { key: 'Degree',    value: 'Sistem Informasi'        },
-  { key: 'Freelance', value: 'Available'               },
-  { key: 'Location',  value: 'Medan, Indonesia'        },
-  { key: 'Email',     value: 'andreyulius@gmail.com'   },
+  { key: 'birthday', value: 'July 1999' },
+  { key: 'age', value: '25' },
+  { key: 'degree', value: 'Sistem Informasi' },
+  { key: 'freelance', value: 'Available' },
+  { key: 'location', value: 'Medan, Indonesia' },
+  { key: 'email', value: 'andreyulius@gmail.com' },
 ]
 
-// About — kartu statistik bawah
 export const ABOUT_STATS = [
-  { icon: '⬇',  number: '2',   label: 'Downloads' },
-  { icon: '✏️', number: '25',  label: 'Projects'  },
-  { icon: '🏅', number: '20+', label: 'Awards'    },
-  { icon: '😊', number: '27+', label: 'Clients'   },
+  { icon: '⬇', number: '2', key: 'downloads' },
+  { icon: '✏️', number: '25', key: 'projects' },
+  { icon: '🏅', number: '20+', key: 'awards' },
+  { icon: '😊', number: '27+', key: 'clients' },
 ]
 
 // Resume — pendidikan
 export const EDUCATION = [
   {
-    title: 'Bachelor in Information Systems',
+    key: 'infoSystems',
     period: '2020 – 2024',
-    desc: 'Graduated from STMK Triguna Dharma Medan with a GPA of 3.71/4.00. Focused on information systems, web development, and software engineering.',
   },
   {
-    title: 'Universitas Mikroskil',
+    key: 'mikroskil',
     period: '2017 – 2020',
-    desc: 'Started studies at Universitas Mikroskil, building a strong foundation before pivoting to professional work experience.',
   },
 ]
 
 // Resume — pengalaman kerja
 export const EXPERIENCE = [
   {
-    title: 'Administrative & Graphic Design',
+    key: 'adminGraphic',
     period: 'Present',
-    desc: 'Working at a construction planning firm — creating graphic designs, handling admin tasks, and assisting in site surveys.',
   },
   {
-    title: 'Sales & Social Media Admin',
+    key: 'salesSocial',
     period: '2023 – 2024',
-    desc: 'Managed social media sales accounts (live selling), tracked incoming payments, and handled inventory for a secondhand shoe store.',
   },
   {
-    title: 'Sysadmin & Cybersecurity Intern — Infinite Learning / IBM',
+    key: 'sysadminIntern',
     period: '2022 – 2023',
-    desc: 'Gained hands-on experience managing IT systems, exploring AI concepts, and studying ethical hacking at Infinite Learning.',
   },
   {
-    title: 'Web Design & UI/UX Intern — PT. GLU',
+    key: 'uiuxIntern',
     period: '2022 – 2023',
-    desc: 'Created responsive web layouts at a Medan-based startup, collaborating closely with developers and product teams.',
   },
   {
-    title: 'Junior Web Developer — Freelance',
+    key: 'juniorFreelance',
     period: '2019 – 2023',
-    desc: 'Handled website projects for individual and small business clients across various industries.',
   },
 ]
 
@@ -124,24 +91,20 @@ export const SKILLS = [
 // Services
 export const SERVICES = [
   {
-    icon:  '🎨',
-    title: 'Graphic Design',
-    desc:  'Creative visual solutions for branding, marketing materials, and digital assets with attention-grabbing aesthetics.',
+    key: 'graphicDesign',
+    icon: '🎨',
   },
   {
-    icon:  '💼',
-    title: 'Portfolio of Works',
-    desc:  'Curated showcase of completed projects demonstrating expertise and diverse capabilities across industries.',
+    key: 'portfolioWorks',
+    icon: '💼',
   },
   {
-    icon:  '📱',
-    title: 'Responsive Theme',
-    desc:  'Fully adaptive websites that deliver optimal viewing experience across all devices, from desktop to mobile.',
+    key: 'responsiveTheme',
+    icon: '📱',
   },
   {
-    icon:  '🌐',
-    title: 'Go Beyond Limits',
-    desc:  'Innovative solutions pushing boundaries through cutting-edge technologies and unconventional approaches.',
+    key: 'goBeyondLimits',
+    icon: '🌐',
   },
 ]
 
@@ -158,70 +121,54 @@ export const PORTFOLIO_ITEMS = [
   { img: '/img/portfolio/008.jpg', title: 'Web & Mobile',   cat: 'webdesign'    },
 ]
 
-// Portfolio — tombol filter
 export const PORTFOLIO_FILTERS = [
-  { key: 'all',          label: 'All'          },
-  { key: 'webdesign',    label: 'Web Design'   },
-  { key: 'mobiledesign', label: 'Mobile Design'},
-  { key: 'seo',          label: 'SEO'          },
-  { key: 'graphic',      label: 'Graphic'      },
+  { key: 'all' },
+  { key: 'webdesign' },
+  { key: 'mobiledesign' },
+  { key: 'seo' },
+  { key: 'graphic' },
 ]
 
 // Testimonial
 export const TESTIMONIALS = [
   {
-    img:   '/img/client-01.png',
-    name:  'Jane Doe',
-    role:  'SEO Manager',
-    quote: 'In a professional context it often happens that private or corporate clients order a publication to be made. Andrey delivered exceptional results.',
+    key: 'jane',
+    img: '/img/client-01.png',
   },
   {
-    img:   '/img/client-02.png',
-    name:  'Andrey',
-    role:  'UI Designer',
-    quote: 'Andrey is a talented designer with great attention to detail. The project was delivered on time and exceeded our expectations.',
+    key: 'andrey',
+    img: '/img/client-02.png',
   },
   {
-    img:   '/img/client-03.png',
-    name:  'Jully Doe',
-    role:  'UX Designer',
-    quote: 'Working with Andrey was a great experience. His design sense and technical knowledge are top notch.',
+    key: 'jully',
+    img: '/img/client-03.png',
   },
   {
-    img:   '/img/client-04.png',
-    name:  'Mike Smith',
-    role:  'Product Manager',
-    quote: 'Highly recommended! Andrey brought creative ideas and professional execution to our project.',
+    key: 'mike',
+    img: '/img/client-04.png',
   },
 ]
 
 // Blog — artikel
 export const BLOG_POSTS = [
   {
-    img:     '/img/blog-img-01.jpg',
-    title:   'Be Your Best Version',
-    excerpt: 'Focus on your strengths, work on your weaknesses, and always keep learning.',
-    content: 'The journey to self-improvement is lifelong and rewarding. Focus on your strengths, work on your weaknesses, and always keep learning. Writing down your goals creates accountability and gives you a roadmap to follow. Start small, stay consistent, and celebrate every milestone along the way.',
+    key: 'bestVersion',
+    img: '/img/blog-img-01.jpg',
   },
   {
-    img:     '/img/blog-img-02.jpg',
-    title:   '5 Tips In UI/UX Web Design',
-    excerpt: 'Always put the user first. Keep it simple, intuitive, and accessible to everyone.',
-    content: '1. Always put the user first.\n2. Keep it simple and intuitive.\n3. Use consistent design patterns.\n4. Make it accessible to everyone.\n5. Test, iterate, and improve.\n\nGood UI/UX design is not just about aesthetics — it is about creating experiences that delight and empower users.',
+    key: 'tipsUiUx',
+    img: '/img/blog-img-02.jpg',
   },
   {
-    img:     '/img/blog-img-03.jpg',
-    title:   'Write Your Dreams',
-    excerpt: 'Writing down your dreams and goals is one of the most powerful habits you can develop.',
-    content: 'Writing down your dreams and goals is one of the most powerful habits you can develop. It forces clarity of thought, creates accountability, and gives you a clear roadmap to follow. Start with small dreams and work your way up. The act of writing transforms abstract wishes into concrete plans.',
+    key: 'writeDreams',
+    img: '/img/blog-img-03.jpg',
   },
 ]
 
-// Contact — info
 export const CONTACT_INFO = [
-  { icon: '📍', label: 'Address', value: 'Medan, North Sumatera, Indonesia' },
-  { icon: '📞', label: 'Phone',   value: '+62 812-1100-XXXX'                },
-  { icon: '✉️', label: 'Email',   value: 'andreyulius@gmail.com'            },
+  { icon: '📍', key: 'address', value: 'Medan, North Sumatera, Indonesia' },
+  { icon: '📞', key: 'phone', value: '+62 812-1100-XXXX' },
+  { icon: '✉️', key: 'email', value: 'andreyulius@gmail.com' },
 ]
 
 // Contact — social media

@@ -50,12 +50,62 @@
     "subtitle": "Saya tersedia untuk proyek freelance",
     "education": "Pendidikan",
     "experience": "Pengalaman",
-    "skillsTitle": "Keahlian Teknis"
+    "skillsTitle": "Keahlian Teknis",
+    "edu": {
+      "infoSystems": {
+        "title": "Sarjana Sistem Informasi",
+        "desc": "Lulus dari STMK Triguna Dharma Medan dengan IPK 3.71/4.00. Fokus pada sistem informasi, pengembangan web, dan rekayasa perangkat lunak."
+      },
+      "mikroskil": {
+        "title": "Universitas Mikroskil",
+        "desc": "Membangun fondasi yang kuat sebelum beralih ke pengalaman kerja profesional di bidang desain dan pengembangan."
+      }
+    },
+    "exp": {
+      "adminGraphic": {
+        "title": "Admin & Desain Grafis",
+        "desc": "Bekerja di perusahaan perencanaan konstruksi — membuat desain grafis, menangani tugas admin, dan membantu survei lapangan."
+      },
+      "salesSocial": {
+        "title": "Admin Penjualan & Media Sosial",
+        "desc": "Mengelola akun penjualan media sosial (live selling), melacak pembayaran, dan menangani inventaris toko sepatu bekas."
+      },
+      "sysadminIntern": {
+        "title": "Magang Sysadmin & Keamanan Siber — Infinite Learning / IBM",
+        "desc": "Pengalaman langsung mengelola sistem IT, menjelajahi konsep AI, dan mempelajari ethical hacking."
+      },
+      "uiuxIntern": {
+        "title": "Magang Web Design & UI/UX — PT. GLU",
+        "desc": "Membuat tata letak web responsif di startup berbasis Medan, berkolaborasi dengan developer dan tim produk."
+      },
+      "juniorFreelance": {
+        "title": "Junior Web Developer — Freelance",
+        "desc": "Menangani proyek website untuk klien individu dan usaha kecil di berbagai industri."
+      }
+    }
   },
   "services": {
     "tag": "Yang Saya Lakukan",
     "title": "Layanan Saya",
-    "subtitle": "Layanan yang saya tawarkan kepada klien"
+    "subtitle": "Layanan yang saya tawarkan kepada klien",
+    "items": {
+      "graphicDesign": {
+        "title": "Desain Grafis",
+        "desc": "Solusi visual kreatif untuk branding, materi pemasaran, dan aset digital dengan estetika yang menarik perhatian."
+      },
+      "portfolioWorks": {
+        "title": "Portofolio Karya",
+        "desc": "Kumpulan karya terpilih yang menunjukkan keahlian dan kemampuan beragam di berbagai industri."
+      },
+      "responsiveTheme": {
+        "title": "Tema Responsif",
+        "desc": "Website adaptif yang memberi pengalaman tampilan optimal di semua perangkat, dari desktop hingga mobile."
+      },
+      "goBeyondLimits": {
+        "title": "Melampaui Batas",
+        "desc": "Solusi inovatif yang mendorong batas melalui teknologi modern dan pendekatan yang tidak konvensional."
+      }
+    }
   },
   "portfolio": {
     "tag": "Karya Saya",
@@ -72,7 +122,29 @@
   "testimonial": {
     "tag": "Testimoni",
     "title": "Klien Saya",
-    "subtitle": "Apa yang klien saya katakan"
+    "subtitle": "Apa yang klien saya katakan",
+    "items": {
+      "jane": {
+        "name": "Jane Doe",
+        "role": "Manajer SEO",
+        "quote": "Dalam konteks profesional, klien pribadi maupun perusahaan sering memesan publikasi untuk dibuat. Andrey memberikan hasil yang sangat baik."
+      },
+      "andrey": {
+        "name": "Andrey",
+        "role": "UI Designer",
+        "quote": "Andrey adalah desainer berbakat dengan perhatian detail yang tinggi. Proyek selesai tepat waktu dan melampaui ekspektasi kami."
+      },
+      "jully": {
+        "name": "Jully Doe",
+        "role": "UX Designer",
+        "quote": "Bekerja bersama Andrey adalah pengalaman yang menyenangkan. Selera desain dan pengetahuan teknisnya sangat baik."
+      },
+      "mike": {
+        "name": "Mike Smith",
+        "role": "Manajer Produk",
+        "quote": "Sangat direkomendasikan! Andrey membawa ide kreatif dan eksekusi profesional ke proyek kami."
+      }
+    }
   },
   "blog": {
     "tag": "Blog",
@@ -80,7 +152,24 @@
     "subtitle": "Lihat artikel blog terbaru saya",
     "by": "oleh Andrey",
     "readMore": "Baca Selengkapnya →",
-    "label": "Artikel Blog"
+    "label": "Artikel Blog",
+    "posts": {
+      "bestVersion": {
+        "title": "Jadilah Versi Terbaik Dirimu",
+        "excerpt": "Fokus pada kekuatanmu, perbaiki kelemahanmu, dan terus belajar.",
+        "content": "Perjalanan pengembangan diri berlangsung seumur hidup dan sangat bermakna. Fokus pada kekuatanmu, perbaiki kelemahanmu, dan terus belajar. Menulis tujuan membuatmu lebih bertanggung jawab dan punya arah yang jelas. Mulai dari langkah kecil, tetap konsisten, dan rayakan setiap kemajuan."
+      },
+      "tipsUiUx": {
+        "title": "5 Tips UI/UX Web Design",
+        "excerpt": "Utamakan pengguna. Buat sederhana, intuitif, dan mudah diakses semua orang.",
+        "content": "1. Utamakan kebutuhan pengguna.\n2. Jaga desain tetap sederhana dan intuitif.\n3. Gunakan pola desain yang konsisten.\n4. Pastikan aksesibilitas untuk semua pengguna.\n5. Uji, iterasi, dan terus tingkatkan.\n\nUI/UX yang baik bukan hanya tentang tampilan, tetapi tentang pengalaman yang nyaman dan bermanfaat."
+      },
+      "writeDreams": {
+        "title": "Tuliskan Mimpimu",
+        "excerpt": "Menulis mimpi dan tujuan adalah kebiasaan kuat untuk mewujudkan rencana nyata.",
+        "content": "Menuliskan mimpi dan tujuan membantu memperjelas pikiran, membangun komitmen, dan memberi peta jalan yang bisa diikuti. Mulailah dari tujuan kecil lalu berkembang ke target yang lebih besar. Saat ditulis, keinginan yang abstrak berubah menjadi rencana yang konkret."
+      }
+    }
   },
   "contact": {
     "tag": "Kontak",

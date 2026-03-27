@@ -5,12 +5,14 @@
 
 import useTyped from '../hooks/useTyped'
 import { TYPED_WORDS, HERO_STATS } from '../data/portfolioData'
+import { useTranslation } from 'react-i18next'
 import styles from './Hero.module.css'
 
 const ORBIT_OUTER = ['📸', '✈️', '▶️', '💻']
 const ORBIT_INNER = ['🎨', '⚡', '🔧', '💡']
 
 export default function Hero() {
+  const { t } = useTranslation()
   const typedText = useTyped(TYPED_WORDS)
 
   return (
@@ -24,7 +26,7 @@ export default function Hero() {
         <div>
           <div className="fade-in">
             <span className={styles.dot} />
-            <span>Available for Freelance Projects</span>
+            <span>{t('hero.available', { defaultValue: 'Available for Freelance Projects' })}</span>
           </div>
 
           <h1 className={`${styles.name} fade-in fade-in-delay-1`}>
@@ -40,25 +42,28 @@ export default function Hero() {
           </div>
 
           <p className={`${styles.desc} fade-in fade-in-delay-3`}>
-            Fresh web development graduate with solid foundation in design &amp;
-            development. Based in Medan, Indonesia — building clean, modern digital
-            experiences.
+            {t('hero.desc', {
+              defaultValue:
+                'Fresh web development graduate with solid foundation in design & development. Based in Medan, Indonesia — building clean, modern digital experiences.',
+            })}
           </p>
 
           <div className={`${styles.cta} fade-in fade-in-delay-4`}>
             <a href="/ResumeCV-Andrey.pdf" download className="btn-primary">
-              ⬇ Download CV
+              {t('hero.downloadCV', { defaultValue: '⬇ Download CV' })}
             </a>
             <a href="#contact" className="btn-secondary">
-              Get In Touch →
+              {t('hero.getInTouch', { defaultValue: 'Get In Touch →' })}
             </a>
           </div>
 
           <div className={`${styles.stats} fade-in fade-in-delay-4`}>
             {HERO_STATS.map((stat) => (
-              <div key={stat.label} className={styles.statItem}>
+              <div key={stat.key} className={styles.statItem}>
                 <span className={styles.statNum}>{stat.number}</span>
-                <span className={styles.statLabel}>{stat.label}</span>
+                <span className={styles.statLabel}>
+                  {t(`hero.stats.${stat.key}`, { defaultValue: stat.key })}
+                </span>
               </div>
             ))}
           </div>

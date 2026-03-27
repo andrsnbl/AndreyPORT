@@ -127,6 +127,8 @@
 /* Responsive */
 @media (max-width: 1024px) {
   .hamburger { display: flex; }
+  .nav { padding: 0 1rem; }
+  .mobileMenu { padding: 1rem; }
 }
 .langBtn {
   padding: 0.3rem 0.75rem;
@@ -142,4 +144,30 @@
 .langBtn:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .nav {
+    height: 58px;
+    padding: 0 0.75rem;
+  }
+  .logo { font-size: 1.12rem; }
+  .actions { gap: 0.45rem; }
+  .themeBtn {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+  .langBtn {
+    padding: 0.25rem 0.52rem;
+    font-size: 0.72rem;
+  }
+  .mobileMenu {
+    top: 58px;
+    padding: 0.85rem 0.85rem 1rem;
+  }
+  .mobileMenu a {
+    font-size: 0.95rem;
+    padding: 0.45rem 0;
+  }
 }

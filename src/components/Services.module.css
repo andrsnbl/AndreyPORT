@@ -60,3 +60,17 @@
 @media (max-width: 1024px) {
   .grid { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 640px) {
+  .grid { margin-top: 2rem; gap: 1rem; }
+  .card { padding: 1.1rem; }
+  .icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+  }
+  .card h5 { font-size: 0.95rem; }
+  .card p { font-size: 0.82rem; }
+}
