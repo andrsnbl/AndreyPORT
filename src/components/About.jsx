@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { ABOUT_INFO, ABOUT_STATS } from '../data/portfolioData'
 import { getDownloadCount, incrementDownloadCount } from '../lib/supabase'
 import { useTranslation } from 'react-i18next'
+import { trackEvent, GA_EVENTS } from '../hooks/useGoogleAnalytics'
 import styles from './About.module.css'
 
 export default function About() {
@@ -21,6 +22,13 @@ export default function About() {
 
   const handleDownloadCV = async (e) => {
     e.preventDefault()
+
+    // Track CV download event
+    trackEvent(GA_EVENTS.CV_DOWNLOAD, {
+      file_name: 'ResumeCV-Andrey.pdf',
+      file_type: 'pdf',
+    })
+
     const newCount = await incrementDownloadCount()
     if (newCount !== null) setDownloadCount(newCount)
     const a = document.createElement('a')

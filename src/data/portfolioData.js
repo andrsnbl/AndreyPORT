@@ -30,7 +30,7 @@ export const ABOUT_INFO = [
   { key: 'degree', value: 'Sistem Informasi' },
   { key: 'freelance', value: 'Available' },
   { key: 'location', value: 'Medan, Indonesia' },
-  { key: 'email', value: 'andreyulius@gmail.com' },
+  { key: 'email', value: 'andreyulius8@gmail.com' },
 ]
 
 export const ABOUT_STATS = [
@@ -178,9 +178,3 @@ export const SOCIAL_LINKS = [
   { icon: '💼', href: 'https://www.linkedin.com/in/andreysinambela',    label: 'LinkedIn'  },
 ]
 
-// EmailJS credentials
-export const EMAILJS_CONFIG = {
-  publicKey:  'RStndPUO0m7CSmmFp',
-  serviceId:  'service_wzvlg6u',
-  templateId: 'template_cet5bxp',
-}

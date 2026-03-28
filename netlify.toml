@@ -1,10 +1,19 @@
 [build]
   command = "chmod +x ./node_modules/.bin/vite && npm run build"
   publish = "dist"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
   NPM_VERSION  = "10"
+
+# Environment variables untuk production deployment
+# Set these in Netlify UI: Site settings → Build & deploy → Environment
+# Do NOT set here to avoid exposing secrets in repository
+# [build.context.production.environment]
+#   EMAILJS_SERVICE_ID = "..."
+#   EMAILJS_TEMPLATE_ID = "..."
+#   EMAILJS_PUBLIC_KEY = "..."
 
 [[redirects]]
   from   = "/*"

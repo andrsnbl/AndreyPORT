@@ -1,0 +1,13 @@
+# robots.txt - Search engine crawler rules
+# Deployed di public folder, accessible di /robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /netlify/
+Disallow: /.env*
+
+# Crawl delay (untuk reduce server load)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://andreyulius.com/sitemap.xml

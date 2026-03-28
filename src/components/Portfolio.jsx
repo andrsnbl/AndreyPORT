@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { usePortfolio } from '../hooks/useSupabase'
+import { supabase } from '../lib/supabase'
 import { PORTFOLIO_ITEMS, PORTFOLIO_FILTERS } from '../data/portfolioData'
+import { trackEvent, GA_EVENTS } from '../hooks/useGoogleAnalytics'
 import styles from './Portfolio.module.css'
 
 export default function Portfolio() {
@@ -45,7 +46,14 @@ export default function Portfolio() {
             <button
               key={f.key}
               className={`${styles.filterBtn} ${activeFilter === f.key ? styles.active : ''}`}
-              onClick={() => setActiveFilter(f.key)}
+              onClick={() => {
+                setActiveFilter(f.key)
+                // Track portfolio filter event
+                trackEvent(GA_EVENTS.PORTFOLIO_FILTER, {
+                  category: f.key,
+                  item_count: f.key === 'all' ? PORTFOLIO_ITEMS.length : PORTFOLIO_ITEMS.filter(i => i.cat === f.key).length,
+                })
+              }}
             >
               {getFilterLabel(f.key)}
             </button>
@@ -58,7 +66,14 @@ export default function Portfolio() {
             <div
               key={`${activeFilter}-${i}`}
               className={styles.item}
-              onClick={() => setLightboxImg(item.img)}
+              onClick={() => {
+                setLightboxImg(item.img)
+                // Track portfolio view
+                trackEvent(GA_EVENTS.PORTFOLIO_VIEW, {
+                  title: item.title,
+                  category: item.cat,
+                })
+              }}
             >
               <img src={item.img} alt={item.title} loading="lazy" />
               <div className={styles.overlay}>

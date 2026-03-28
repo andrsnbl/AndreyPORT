@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { NAV_LINKS } from '../data/portfolioData'
 import styles from './Navbar.module.css'
 import { useTranslation } from 'react-i18next'
+import { trackEvent, GA_EVENTS } from '../hooks/useGoogleAnalytics'
 
 export default function Navbar({ dark, toggleDark }) {
   const [menuOpen,      setMenuOpen]      = useState(false)
@@ -20,6 +21,12 @@ export default function Navbar({ dark, toggleDark }) {
   const next = currentLang === 'id' ? 'en' : 'id'
   i18n.changeLanguage(next)
   localStorage.setItem('lang', next)
+
+  // Track language change
+  trackEvent(GA_EVENTS.LANGUAGE_CHANGE, {
+    from_language: currentLang,
+    to_language: next,
+  })
   }
   const [activeSection, setActiveSection] = useState('hero')
 
@@ -67,7 +74,13 @@ export default function Navbar({ dark, toggleDark }) {
         <div className={styles.actions}>
           <button
             className={styles.themeBtn}
-            onClick={toggleDark}
+            onClick={() => {
+              toggleDark()
+              // Track theme toggle
+              trackEvent(GA_EVENTS.THEME_TOGGLE, {
+                new_theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark',
+              })
+            }}
             title={dark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           >
             {dark ? '☀️' : '🌙'}

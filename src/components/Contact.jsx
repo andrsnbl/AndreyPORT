@@ -4,8 +4,9 @@
 // ─────────────────────────────────────────────────────────────
 
 import { useState } from 'react'
-import { CONTACT_INFO, SOCIAL_LINKS, EMAILJS_CONFIG } from '../data/portfolioData'
+import { CONTACT_INFO, SOCIAL_LINKS } from '../data/portfolioData'
 import { useTranslation } from 'react-i18next'
+import { trackEvent, GA_EVENTS } from '../hooks/useGoogleAnalytics'
 import styles from './Contact.module.css'
 
 export default function Contact() {
@@ -20,8 +21,8 @@ export default function Contact() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  // Kirim pesan
-  const handleSubmit = (e) => {
+  // Kirim pesan via Netlify Function (backend — lebih aman)
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     // Validasi sederhana
@@ -32,26 +33,39 @@ export default function Contact() {
 
     setStatus('loading')
 
-    // Kirim via EmailJS jika sudah dimuat
-    if (window.emailjs) {
-      window.emailjs.init(EMAILJS_CONFIG.publicKey)
-      window.emailjs
-        .send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, {
-          name:     form.name,
-          email:    form.email,
-          comments: form.message,
+    try {
+      const response = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      })
+
+      if (response.ok) {
+        // Track successful form submission
+        trackEvent(GA_EVENTS.CONTACT_SUBMIT, {
+          status: 'success',
+          message_length: form.message.length,
         })
-        .then(() => {
-          setStatus('success')
-          setForm({ name: '', email: '', message: '' })
-        })
-        .catch(() => setStatus('error'))
-    } else {
-      // Fallback jika EmailJS tidak termuat
-      setTimeout(() => {
         setStatus('success')
         setForm({ name: '', email: '', message: '' })
-      }, 1200)
+      } else {
+        // Track failed submission
+        trackEvent(GA_EVENTS.CONTACT_SUBMIT, {
+          status: 'failed',
+        })
+        setStatus('error')
+      }
+    } catch (error) {
+      console.error('[Contact] Submit error:', error)
+      trackEvent(GA_EVENTS.CONTACT_SUBMIT, {
+        status: 'error',
+        error: error.message,
+      })
+      setStatus('error')
     }
   }
 
