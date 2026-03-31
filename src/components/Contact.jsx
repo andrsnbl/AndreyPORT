@@ -12,7 +12,7 @@ import styles from './Contact.module.css'
 export default function Contact() {
   const { t } = useTranslation()
   // State form
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   // Status: '' | 'loading' | 'success' | 'error'
   const [status, setStatus] = useState('')
 
@@ -40,6 +40,7 @@ export default function Contact() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
+          subject: form.subject,
           message: form.message,
         }),
       })
@@ -51,7 +52,7 @@ export default function Contact() {
           message_length: form.message.length,
         })
         setStatus('success')
-        setForm({ name: '', email: '', message: '' })
+        setForm({ name: '', email: '', subject: '', message: '' })
       } else {
         // Track failed submission
         trackEvent(GA_EVENTS.CONTACT_SUBMIT, {
@@ -160,6 +161,20 @@ export default function Contact() {
                 type="email"
                 placeholder={t('contact.form.emailPh', { defaultValue: 'you@example.com' })}
                 value={form.email}
+                onChange={handleChange}
+                className={styles.input}
+              />
+            </div>
+
+            {/* Subject */}
+            <div className={styles.formGroup}>
+              <label htmlFor="subject">{t('contact.form.subject', { defaultValue: 'Subject (Optional)' })}</label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                placeholder={t('contact.form.subjectPh', { defaultValue: 'Project Inquiry' })}
+                value={form.subject}
                 onChange={handleChange}
                 className={styles.input}
               />

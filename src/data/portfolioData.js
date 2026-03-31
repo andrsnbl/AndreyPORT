@@ -149,19 +149,29 @@ export const TESTIMONIALS = [
   },
 ]
 
-// Blog — artikel
+// Blog — artikel fallback (dipakai jika Sanity tidak dikonfigurasi)
+// FIX BUG UTAMA: Tambahkan title, excerpt, content agar Blog.jsx bisa render
 export const BLOG_POSTS = [
   {
     key: 'bestVersion',
     img: '/img/blog-img-01.jpg',
+    title: 'Becoming the Best Version of Yourself',
+    excerpt: 'Tips and insights on personal growth, mindset, and building habits that last.',
+    content: 'Personal growth is a lifelong journey. It starts with small, consistent actions every day. Whether it\'s reading, exercising, or simply reflecting on your day — every step counts toward becoming the best version of yourself.',
   },
   {
     key: 'tipsUiUx',
     img: '/img/blog-img-02.jpg',
+    title: 'Tips & Tricks for Better UI/UX Design',
+    excerpt: 'Practical design tips to improve user experience and create beautiful interfaces.',
+    content: 'Good UI/UX design is about empathy. Understanding your users\' needs, reducing friction, and guiding them naturally through your interface. Always test with real users and iterate based on feedback.',
   },
   {
     key: 'writeDreams',
     img: '/img/blog-img-03.jpg',
+    title: 'Write Down Your Dreams & Make Them Real',
+    excerpt: 'Why writing your goals down is the first step to actually achieving them.',
+    content: 'Studies show that people who write down their goals are significantly more likely to achieve them. Writing transforms vague wishes into concrete intentions. Start today — grab a notebook and write down what you truly want.',
   },
 ]
 
@@ -177,4 +187,3 @@ export const SOCIAL_LINKS = [
   { icon: '🐱', href: 'https://github.com/ucoktebas00',                 label: 'GitHub'    },
   { icon: '💼', href: 'https://www.linkedin.com/in/andreysinambela',    label: 'LinkedIn'  },
 ]
-

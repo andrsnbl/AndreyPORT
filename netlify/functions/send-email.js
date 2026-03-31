@@ -1,8 +1,11 @@
 // ─────────────────────────────────────────────────────────
 // netlify/functions/send-email.js
 // Serverless function untuk send email via EmailJS
+// + Save submissions ke Supabase
 // SECURE: Private keys tidak terekspos ke client
 // ─────────────────────────────────────────────────────────
+
+import { createClient } from '@supabase/supabase-js'
 
 export const handler = async (event) => {
   // Hanya accept POST requests
@@ -15,7 +18,7 @@ export const handler = async (event) => {
 
   try {
     // Parse request body
-    const { name, email, message } = JSON.parse(event.body)
+    const { name, email, subject, message } = JSON.parse(event.body)
 
     // Validasi input
     if (!name || !email || !message) {
@@ -34,8 +37,33 @@ export const handler = async (event) => {
       }
     }
 
-    // Rate limiting: check if sender already submitted in last 5 minutes
-    // You can implement this with a database or cache service
+    // Initialize Supabase untuk save submission
+    const supabaseUrl = process.env.VITE_SUPABASE_URL
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+    if (supabaseUrl && supabaseServiceKey) {
+      const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+      // Insert ke contact_submissions
+      const { data, error: insertError } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            name,
+            email,
+            subject: subject || 'No subject',
+            message,
+            status: 'new',
+          },
+        ])
+
+      if (insertError) {
+        console.error('[Supabase] Insert failed:', insertError.message)
+        // Continue - jangan fail jika Supabase error
+      } else {
+        console.log('[Supabase] Submission saved')
+      }
+    }
 
     // Send email via EmailJS (API key secure di server)
     const emailjsUrl = 'https://api.emailjs.com/api/v1.0/email/send'
@@ -61,6 +89,7 @@ export const handler = async (event) => {
         template_params: {
           name,
           email,
+          subject: subject || 'No subject',
           comments: message,
         },
       }),
@@ -76,10 +105,13 @@ export const handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, message: 'Email sent successfully' }),
+      body: JSON.stringify({ 
+        success: true, 
+        message: 'Submission received and email sent successfully' 
+      }),
     }
   } catch (error) {
-    console.error('[EmailJS] Error:', error.message)
+    console.error('[Handler] Error:', error.message)
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Internal server error' }),

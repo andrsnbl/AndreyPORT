@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react'
 // Komponen layout
 import Navbar    from './components/Navbar'
 import ScrollTop from './components/ScrollTop'
-import ErrorBoundary from './components/ErrorBoundary'
-import StructuredData from './components/StructuredData'
 
 // Komponen section (satu file per section)
 import Hero        from './components/Hero'
@@ -17,15 +15,11 @@ import Blog        from './components/Blog'
 import Contact     from './components/Contact'
 import Footer      from './components/Footer'
 
-// Hooks
+// Hook animasi scroll — dipanggil DI SINI supaya aktif untuk SEMUA section
 import useScrollAnimation from './hooks/useScrollAnimation'
-import { useSEO, SEO_DATA } from './hooks/useSEO'
 
 export default function App() {
   const [dark, setDark] = useState(false)
-
-  // Set default SEO tags untuk home page
-  useSEO(SEO_DATA.home)
 
   // Terapkan tema ke <html data-theme="...">
   useEffect(() => {
@@ -36,8 +30,7 @@ export default function App() {
   useScrollAnimation()
 
   return (
-    <ErrorBoundary>
-      <StructuredData />
+    <>
       <Navbar dark={dark} toggleDark={() => setDark((d) => !d)} />
 
       <main>
@@ -53,6 +46,6 @@ export default function App() {
 
       <Footer />
       <ScrollTop />
-    </ErrorBoundary>
+    </>
   )
 }
