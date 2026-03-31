@@ -9,7 +9,7 @@ export default defineConfig({
 
   projectId: 'scenq4gg',
   dataset: 'production',
-
+  basePath: '/admin',
   plugins: [structureTool(), visionTool()],
 
   schema: {
