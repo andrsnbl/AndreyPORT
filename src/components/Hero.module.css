@@ -29,17 +29,9 @@
   opacity: 0.1;
 }
 .blob1 { width: 500px; height: 500px; background: var(--accent); top: -100px; right: -100px; }
-.blob2 { width: 300px; height: 300px; background: #06B6D4;      bottom: 0;   left: -100px; }
+.blob2 { width: 300px; height: 300px; background: #06B6D4; bottom: 0; left: -100px; }
 
 /* Badge available */
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  font-size: 0.875rem;
-  color: var(--text2);
-}
 .dot {
   display: inline-block;
   width: 8px; height: 8px;
@@ -90,31 +82,72 @@
 .statNum  { display: block; font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
 .statLabel{ display: block; font-size: 0.72rem; color: var(--text2); margin-top: 3px; }
 
-/* Orbit */
+/* ══════════════════════════════════════
+   ORBIT VISUAL
+   ══════════════════════════════════════ */
 .visual {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 440px;
 }
+
 .orbitWrapper {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: 340px;
+  height: 340px;
 }
-.orbitOuter,
+
+/* ─ Ring orbit ─
+   Seluruh ring (beserta icon di dalamnya) berputar sebagai satu kesatuan.
+   Icon di dalam punya counter-rotation agar logonya selalu tegak. */
+.orbitOuter {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(124, 58, 237, 0.35);
+  /* anchor di tengah sebelum rotate */
+  margin-left: -50%;
+  margin-top: -50%;
+  animation: orbitSpin 20s linear infinite;
+  /* Seluruh icon-icon menempel DI DALAM elemen ini */
+}
+
 .orbitInner {
   position: absolute;
   top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  width: 68%; height: 68%;
   border-radius: 50%;
-  border: 1.5px dashed rgba(124, 58, 237, 0.25);
+  border: 1.5px dashed rgba(6, 182, 212, 0.35);
+  margin-left: -34%;
+  margin-top: -34%;
+  animation: orbitSpinR 14s linear infinite;
 }
-.orbitOuter { width: 100%; height: 100%; animation: spin 18s linear infinite; }
-.orbitInner { width: 78%; height: 78%; animation: spin 12s linear infinite reverse; }
 
-.orbitIcon, .orbitIconSm {
+/* Icon di ring luar */
+.orbitIcon {
   position: absolute;
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.orbitIcon:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+
+/* Icon di ring dalam */
+.orbitIconSm {
+  position: absolute;
+  width: 38px; height: 38px;
+  border-radius: 10px;
   background: var(--card);
   border: 1px solid var(--border);
   display: flex;
@@ -122,61 +155,134 @@
   justify-content: center;
   box-shadow: var(--shadow);
 }
-.orbitIcon   { width: 44px; height: 44px; border-radius: 12px; font-size: 1.2rem; animation: counter-spin 18s linear infinite; }
-.orbitIconSm { width: 36px; height: 36px; border-radius: 10px; font-size: 1rem;   animation: counter-spin 12s linear infinite; }
 
-.pos0 { top: -22px;    left: calc(50% - 22px); }
-.pos1 { bottom: -22px; left: calc(50% - 22px); }
-.pos2 { left: -22px;   top: calc(50% - 22px);  }
-.pos3 { right: -22px;  top: calc(50% - 22px);  }
+/* Counter-rotation — isi icon tegak meski ring berputar */
+.counterOuter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: orbitSpinR 20s linear infinite; /* berlawanan dengan orbitOuter */
+}
+.counterInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: orbitSpin 14s linear infinite; /* berlawanan dengan orbitInner */
+}
 
-.posInner0 { top: -18px;    left: calc(50% - 18px); }
-.posInner1 { bottom: -18px; left: calc(50% - 18px); }
-.posInner2 { left: -18px;   top: calc(50% - 18px);  }
-.posInner3 { right: -18px;  top: calc(50% - 18px);  }
+/* ─ Posisi icon di ring LUAR ─
+   Icon diletakkan di tepi lingkaran menggunakan transform dari pusat ring.
+   Karena ring sudah di-translate(-50%,-50%) via margin trick,
+   kita posisikan icon di titik N/S/W/E relatif terhadap ukuran ring. */
+.pos0 { top: -24px;    left: calc(50% - 24px); }   /* Atas   */
+.pos1 { bottom: -24px; left: calc(50% - 24px); }   /* Bawah  */
+.pos2 { left: -24px;   top:  calc(50% - 24px); }   /* Kiri   */
+.pos3 { right: -24px;  top:  calc(50% - 24px); }   /* Kanan  */
 
+/* ─ Posisi icon di ring DALAM ─ */
+.posInner0 { top: -19px;    left: calc(50% - 19px); }
+.posInner1 { bottom: -19px; left: calc(50% - 19px); }
+.posInner2 { left: -19px;   top:  calc(50% - 19px); }
+.posInner3 { right: -19px;  top:  calc(50% - 19px); }
+
+/* Foto profil di tengah */
 .centerImg {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 160px; height: 160px;
+  width: 165px; height: 165px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid var(--accent);
-  box-shadow: 0 0 0 8px rgba(124, 58, 237, 0.1), var(--shadow-lg);
+  box-shadow:
+    0 0 0 8px rgba(124, 58, 237, 0.12),
+    0 0 40px rgba(124, 58, 237, 0.3),
+    var(--shadow-lg);
+  z-index: 2;
 }
 
-/* Responsive */
+/* Glow di belakang foto */
+.centerGlow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 190px; height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%);
+  z-index: 1;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════
+   KEYFRAMES
+   ══════════════════════════════════════ */
+
+/* Ring luar berputar searah jarum jam */
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Ring dalam berputar berlawanan jarum jam */
+@keyframes orbitSpinR {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.15); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2); }
+  50%       { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.1); }
+}
+
+/* ── Responsive ── */
 @media (max-width: 1024px) {
   .hero         { min-height: auto; padding: 6.2rem 1.5rem 3rem !important; }
   .grid         { grid-template-columns: 1fr; gap: 3rem; }
   .visual       { height: 300px; }
-  .orbitWrapper { width: 240px; height: 240px; }
-  .centerImg    { width: 120px; height: 120px; }
+  .orbitWrapper { width: 260px; height: 260px; }
+  .centerImg    { width: 125px; height: 125px; }
+  .centerGlow   { width: 140px; height: 140px; }
+  .orbitIcon    { width: 40px; height: 40px; border-radius: 11px; }
+  .orbitIconSm  { width: 32px; height: 32px; border-radius: 9px; }
+  .pos0 { top: -20px;    left: calc(50% - 20px); }
+  .pos1 { bottom: -20px; left: calc(50% - 20px); }
+  .pos2 { left: -20px;   top: calc(50% - 20px);  }
+  .pos3 { right: -20px;  top: calc(50% - 20px);  }
+  .posInner0 { top: -16px;    left: calc(50% - 16px); }
+  .posInner1 { bottom: -16px; left: calc(50% - 16px); }
+  .posInner2 { left: -16px;   top: calc(50% - 16px);  }
+  .posInner3 { right: -16px;  top: calc(50% - 16px);  }
 }
+
 @media (max-width: 640px) {
-  .hero { padding: 5.4rem 1rem 2.2rem !important; }
+  .hero  { padding: 5.4rem 1rem 2.2rem !important; }
   .blob1, .blob2 { display: none; }
-  .name { font-size: 2rem; }
+  .name  { font-size: 2rem; }
   .typed { font-size: 1.03rem; }
-  .desc { max-width: 100%; font-size: 0.94rem; margin-bottom: 1.5rem; }
-  .cta { margin-bottom: 1.4rem; gap: 0.72rem; }
+  .desc  { max-width: 100%; font-size: 0.94rem; margin-bottom: 1.5rem; }
+  .cta   { margin-bottom: 1.4rem; gap: 0.72rem; }
   .stats { gap: 1rem; justify-content: space-between; }
   .statItem { min-width: 40%; }
-  .statNum { font-size: 1.35rem; }
-  .visual { height: 255px; }
-  .orbitWrapper { width: 210px; height: 210px; }
-  .orbitIcon { width: 38px; height: 38px; font-size: 1rem; }
-  .orbitIconSm { width: 30px; height: 30px; font-size: 0.85rem; }
-  .pos0 { top: -19px; left: calc(50% - 19px); }
-  .pos1 { bottom: -19px; left: calc(50% - 19px); }
-  .pos2 { left: -19px; top: calc(50% - 19px); }
-  .pos3 { right: -19px; top: calc(50% - 19px); }
-  .posInner0 { top: -15px; left: calc(50% - 15px); }
-  .posInner1 { bottom: -15px; left: calc(50% - 15px); }
-  .posInner2 { left: -15px; top: calc(50% - 15px); }
-  .posInner3 { right: -15px; top: calc(50% - 15px); }
-  .centerImg { width: 105px; height: 105px; }
+  .statNum  { font-size: 1.35rem; }
+  .visual       { height: 260px; }
+  .orbitWrapper { width: 220px; height: 220px; }
+  .centerImg    { width: 110px; height: 110px; }
+  .centerGlow   { width: 125px; height: 125px; }
+  .orbitIcon    { width: 36px; height: 36px; }
+  .orbitIconSm  { width: 28px; height: 28px; }
+  .pos0 { top: -18px;    left: calc(50% - 18px); }
+  .pos1 { bottom: -18px; left: calc(50% - 18px); }
+  .pos2 { left: -18px;   top: calc(50% - 18px);  }
+  .pos3 { right: -18px;  top: calc(50% - 18px);  }
+  .posInner0 { top: -14px;    left: calc(50% - 14px); }
+  .posInner1 { bottom: -14px; left: calc(50% - 14px); }
+  .posInner2 { left: -14px;   top: calc(50% - 14px);  }
+  .posInner3 { right: -14px;  top: calc(50% - 14px);  }
 }
 
 @media (max-width: 420px) {

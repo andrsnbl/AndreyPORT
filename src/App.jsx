@@ -15,6 +15,9 @@ import Blog        from './components/Blog'
 import Contact     from './components/Contact'
 import Footer      from './components/Footer'
 
+// Debug pages
+import DebugPortfolio from './pages/DebugPortfolio'
+
 // Hook animasi scroll — dipanggil DI SINI supaya aktif untuk SEMUA section
 import useScrollAnimation from './hooks/useScrollAnimation'
 
@@ -28,6 +31,13 @@ export default function App() {
 
   // Aktifkan animasi fade-in untuk seluruh halaman
   useScrollAnimation()
+
+  // Check if debug mode is enabled
+  const isDebugMode = new URLSearchParams(window.location.search).has('debug')
+  
+  if (isDebugMode) {
+    return <DebugPortfolio />
+  }
 
   return (
     <>

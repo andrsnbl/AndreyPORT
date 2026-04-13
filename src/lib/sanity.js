@@ -57,8 +57,10 @@ export function urlFor(source) {
  */
 export async function getAllBlogPosts() {
   if (!sanity) {
-    // Sanity tidak dikonfigurasi — bukan error, kembalikan [] agar fallback ke BLOG_POSTS
-    return []
+    // Sanity tidak dikonfigurasi — throw error spesifik agar hook bisa handle
+    const error = new Error('Sanity not configured. Missing VITE_SANITY_PROJECT_ID')
+    error.code = 'SANITY_NOT_CONFIGURED'
+    throw error
   }
 
   const query = `
@@ -90,7 +92,11 @@ export async function getAllBlogPosts() {
  * Fetch blog post by slug
  */
 export async function getBlogPostBySlug(slug) {
-  if (!sanity) return null
+  if (!sanity) {
+    const error = new Error('Sanity not configured. Missing VITE_SANITY_PROJECT_ID')
+    error.code = 'SANITY_NOT_CONFIGURED'
+    throw error
+  }
 
   const query = `
     *[_type == "post" && slug.current == $slug][0] {
@@ -121,7 +127,11 @@ export async function getBlogPostBySlug(slug) {
  * Fetch blog posts by category
  */
 export async function getBlogPostsByCategory(categorySlug) {
-  if (!sanity) return []
+  if (!sanity) {
+    const error = new Error('Sanity not configured. Missing VITE_SANITY_PROJECT_ID')
+    error.code = 'SANITY_NOT_CONFIGURED'
+    throw error
+  }
 
   const query = `
     *[_type == "post" && references(*[_type=="category" && slug.current == $slug]._id)] | order(publishedAt desc) {
@@ -150,7 +160,11 @@ export async function getBlogPostsByCategory(categorySlug) {
  * Search blog posts
  */
 export async function searchBlogPosts(searchTerm) {
-  if (!sanity) return []
+  if (!sanity) {
+    const error = new Error('Sanity not configured. Missing VITE_SANITY_PROJECT_ID')
+    error.code = 'SANITY_NOT_CONFIGURED'
+    throw error
+  }
 
   const query = `
     *[_type == "post" && (title match $searchTerm || excerpt match $searchTerm)] | order(publishedAt desc) {
@@ -179,7 +193,11 @@ export async function searchBlogPosts(searchTerm) {
  * Get categories
  */
 export async function getCategories() {
-  if (!sanity) return []
+  if (!sanity) {
+    const error = new Error('Sanity not configured. Missing VITE_SANITY_PROJECT_ID')
+    error.code = 'SANITY_NOT_CONFIGURED'
+    throw error
+  }
 
   const query = `
     *[_type == "category"] | order(title asc) {

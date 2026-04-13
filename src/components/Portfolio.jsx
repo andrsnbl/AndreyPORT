@@ -1,27 +1,35 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { supabase } from '../lib/supabase'
-import { PORTFOLIO_ITEMS, PORTFOLIO_FILTERS } from '../data/portfolioData'
+import { PORTFOLIO_FILTERS } from '../data/portfolioData'
+import { usePortfolio } from '../hooks/usePortfolio'
 import { trackEvent, GA_EVENTS } from '../hooks/useGoogleAnalytics'
+import PortfolioPreviewModal from './PortfolioPreviewModal'
 import styles from './Portfolio.module.css'
 
 export default function Portfolio() {
   const { t, i18n } = useTranslation()
   const lang = i18n.language || 'id'
   const [activeFilter, setActiveFilter] = useState('all')
-  const [lightboxImg,  setLightboxImg]  = useState(null)
+  const [selectedItem, setSelectedItem] = useState(null)
+  
+  // Fetch portfolio dari Sanity
+  const { items: portfolioItems, loading, error } = usePortfolio()
 
   // Item yang tampil sesuai filter
   const visible =
     activeFilter === 'all'
-      ? PORTFOLIO_ITEMS
-      : PORTFOLIO_ITEMS.filter((item) => item.cat === activeFilter)
+      ? portfolioItems
+      : portfolioItems.filter((item) => item.cat === activeFilter)
 
   // Label filter dari file bahasa, key dari portfolioData
   // Fallback ke label default jika t belum siap
   const getFilterLabel = (key) => {
     const label = t(`portfolio.filters.${key}`, { defaultValue: key })
     return label || key
+  }
+
+  if (error) {
+    console.error('Portfolio error:', error)
   }
 
   return (
@@ -61,28 +69,58 @@ export default function Portfolio() {
         </div>
 
         {/* ── Grid Karya ── */}
-        <div className={styles.grid}>
-          {visible.map((item, i) => (
-            <div
-              key={`${activeFilter}-${i}`}
-              className={styles.item}
-              onClick={() => {
-                setLightboxImg(item.img)
-                // Track portfolio view
-                trackEvent(GA_EVENTS.PORTFOLIO_VIEW, {
-                  title: item.title,
-                  category: item.cat,
-                })
-              }}
-            >
-              <img src={item.img} alt={item.title} loading="lazy" />
-              <div className={styles.overlay}>
-                <h5>{item.title}</h5>
-                <span>{getFilterLabel(item.cat)}</span>
+        {loading ? (
+          <div className={styles.loadingWrap}>
+            <div className={styles.spinner}></div>
+            <p>{lang === 'id' ? 'Loading portfolio...' : 'Loading portfolio...'}</p>
+          </div>
+        ) : visible.length > 0 ? (
+          <div className={styles.grid}>
+            {visible.map((item, i) => (
+              <div
+                key={`${activeFilter}-${item.id}`}
+                className={styles.item}
+                onClick={() => {
+                  setSelectedItem(item)
+                  // Track portfolio view
+                  trackEvent(GA_EVENTS.PORTFOLIO_VIEW, {
+                    title: item.title,
+                    category: item.cat,
+                    type: item.type,
+                  })
+                }}
+              >
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  loading="lazy"
+                  onError={(e) => {
+                    // Fallback jika image error
+                    e.target.src = '/img/portfolio/001.jpg'
+                    e.target.style.opacity = '0.5'
+                  }}
+                />
+                <div className={styles.previewBadge}>
+                  {item.previewType === 'iframe' && '🌐'}
+                  {item.previewType === 'video' && '▶'}
+                  {item.previewType === 'image' && '🖼'}
+                  {item.previewType === 'gallery' && '🖼'}
+                </div>
+                <div className={styles.overlay}>
+                  <h5>{item.title}</h5>
+                  <span>{getFilterLabel(item.cat)}</span>
+                  <p className={styles.typeLabel}>{item.type}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <p className={styles.empty}>
+            {lang === 'id'
+              ? 'Tidak ada karya di kategori ini.'
+              : 'No works found in this category.'}
+          </p>
+        )}
 
         {/* ── Pesan jika kategori kosong ── */}
         {visible.length === 0 && (
@@ -95,16 +133,7 @@ export default function Portfolio() {
       </div>
 
       {/* ── Lightbox ── */}
-      {lightboxImg && (
-        <div className="lightbox" onClick={() => setLightboxImg(null)}>
-          <button className="lightbox-close">✕</button>
-          <img
-            src={lightboxImg}
-            alt="portfolio"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
+      <PortfolioPreviewModal item={selectedItem} onClose={() => setSelectedItem(null)} />
     </section>
   )
 }

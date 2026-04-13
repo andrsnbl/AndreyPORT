@@ -23,9 +23,13 @@ export default function Blog() {
       console.log('[Blog Debug] Sanity posts loaded:', sanityPosts.length)
       console.log('[Blog Debug] First post:', sanityPosts[0])
     }
-  }, [sanityPosts])
+    if (error) {
+      console.warn('[Blog Debug] Error loading posts:', error)
+    }
+  }, [sanityPosts, error])
 
-  const isFromSanity = Array.isArray(sanityPosts) && sanityPosts.length > 0
+  // Check if Sanity is configured and has posts
+  const isFromSanity = Array.isArray(sanityPosts) && sanityPosts.length > 0 && !error
 
   const displayPosts = isFromSanity
     ? sanityPosts.slice(0, 3).map((post) => {

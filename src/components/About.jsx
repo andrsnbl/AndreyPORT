@@ -13,11 +13,40 @@ import styles from './About.module.css'
 export default function About() {
   const { t } = useTranslation()
   const [downloadCount, setDownloadCount] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    getDownloadCount().then((count) => {
-      if (count !== null) setDownloadCount(count)
-    })
+    let isMounted = true
+    
+    async function fetchDownloadCount() {
+      try {
+        console.log('[About] Fetching download count...')
+        const count = await getDownloadCount()
+        if (isMounted) {
+          if (count !== null) {
+            setDownloadCount(count)
+            setError(null)
+            console.log('[About] Download count loaded:', count)
+          } else {
+            setError('Failed to load download count')
+            console.warn('[About] Download count is null, using fallback')
+          }
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err.message)
+          console.error('[About] Error fetching download count:', err)
+        }
+      } finally {
+        if (isMounted) setLoading(false)
+      }
+    }
+
+    fetchDownloadCount()
+    return () => {
+      isMounted = false
+    }
   }, [])
 
   const handleDownloadCV = async (e) => {
@@ -36,6 +65,23 @@ export default function About() {
     a.download = 'ResumeCV-Andrey.pdf'
     a.click()
   }
+
+  // Fungsi untuk menghitung usia berdasarkan tanggal lahir
+  const calculateAge = (birthday) => {
+    const parts = birthday.split(' ')
+    const birthYear = parseInt(parts[1])
+    const currentYear = new Date().getFullYear()
+    const birthMonth = new Date(Date.parse(parts[0] + ' 1, 2000')).getMonth()
+    const currentMonth = new Date().getMonth()
+    let age = currentYear - birthYear
+    if (currentMonth < birthMonth || (currentMonth === birthMonth && new Date().getDate() < 1)) {
+      age--
+    }
+    return age
+  }
+
+  const birthday = ABOUT_INFO.find(item => item.key === 'birthday').value
+  const age = calculateAge(birthday)
 
   return (
     <section id="about" className={styles.about}>
@@ -72,7 +118,7 @@ export default function About() {
             {ABOUT_INFO.map((item) => (
               <div key={item.key} className={styles.infoItem}>
                 <strong>{t(`about.infoKeys.${item.key}`, { defaultValue: item.key })}</strong>
-                <span>{item.value}</span>
+                <span>{item.key === 'age' ? age : item.value}</span>
               </div>
             ))}
           </div>
@@ -91,17 +137,32 @@ export default function About() {
 
       {/* Kartu statistik di bawah grid */}
       <div className={styles.statsRow}>
-        {ABOUT_STATS.map((stat, i) => (
-          <div key={stat.key} className={`${styles.statCard} fade-in fade-in-delay-${i + 1}`}>
-            <span className={styles.statIcon}>{stat.icon}</span>
-            <span className={styles.statNum}>
-              {stat.key === 'downloads' && downloadCount !== null ? downloadCount : stat.number}
-            </span>
-            <span className={styles.statLabel}>
-              {t(`about.stats.${stat.key}`, { defaultValue: stat.key })}
-            </span>
-          </div>
-        ))}
+        {ABOUT_STATS.map((stat, i) => {
+          // Handle special case for downloads stat
+          let displayValue = stat.number
+          if (stat.key === 'downloads') {
+            if (loading) {
+              displayValue = '...' // Loading state
+            } else if (error) {
+              displayValue = stat.number // Fallback ke default jika error
+              console.warn('[About] Showing fallback value due to error:', error)
+            } else if (downloadCount !== null) {
+              displayValue = downloadCount // Use actual count from Supabase
+            }
+          }
+
+          return (
+            <div key={stat.key} className={`${styles.statCard} fade-in fade-in-delay-${i + 1}`}>
+              <span className={styles.statIcon}>{stat.icon}</span>
+              <span className={styles.statNum}>
+                {displayValue}
+              </span>
+              <span className={styles.statLabel}>
+                {t(`about.stats.${stat.key}`, { defaultValue: stat.key })}
+              </span>
+            </div>
+          )
+        })}
       </div>
 
     </section>
