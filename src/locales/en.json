@@ -5,6 +5,7 @@
     "resume": "Resume",
     "services": "Services",
     "portfolio": "Portfolio",
+    "storefront": "Store",
     "clients": "Clients",
     "blog": "Blog",
     "contact": "Contact"
@@ -117,6 +118,53 @@
       "mobiledesign": "Mobile Design",
       "seo": "SEO",
       "graphic": "Graphic"
+    }
+  },
+  "storefront": {
+    "tag": "🛍️ Product Collection",
+    "title": "Our",
+    "titleSpan": "Store",
+    "subtitle": "Premium products with best quality",
+    "all": "All Products",
+    "addCart": "Add to Cart",
+    "askVia": "Ask on WhatsApp",
+    "order": "Order Now",
+    "noproducts": "No products in this category",
+    "categories": {
+      "fashion": "Fashion",
+      "electronics": "Electronics",
+      "accessories": "Accessories",
+      "lifestyle": "Lifestyle"
+    },
+    "cart": {
+      "title": "Your Cart",
+      "items": "Products",
+      "total": "Total:",
+      "checkout": "Proceed to Payment"
+    },
+    "payment": {
+      "title": "Payment",
+      "fillForm": "Please fill in all data first",
+      "orderSummary": "Order Summary",
+      "total": "Total",
+      "method": "Payment Method",
+      "contactInfo": "Contact Information",
+      "namePh": "Full Name",
+      "emailPh": "Email",
+      "phonePh": "WhatsApp Number",
+      "addressPh": "Delivery Address",
+      "bankTransfer": "Bank Transfer",
+      "bankTransferDesc": "Direct transfer to our bank account",
+      "cancel": "Cancel",
+      "confirm": "Pay Now",
+      "processing": "Processing...",
+      "success": "Payment Successful!",
+      "successDesc": "Thank you for your purchase. You will receive a confirmation email."
+    },
+    "cta": {
+      "title": "Want to know more?",
+      "desc": "Contact us now for special offers and free consultation",
+      "button": "Chat with Us"
     }
   },
   "testimonial": {

@@ -17,14 +17,6 @@ export default function Blog() {
 
   const { posts: sanityPosts, loading, error } = useAllBlogPosts()
 
-  // Debug logging
-  useEffect(() => {
-    if (sanityPosts && sanityPosts.length > 0) {
-      console.log('[Blog Debug] Sanity posts loaded:', sanityPosts.length)
-      console.log('[Blog Debug] First post:', sanityPosts[0])
-    }
-  }, [sanityPosts])
-
   const isFromSanity = Array.isArray(sanityPosts) && sanityPosts.length > 0
 
   const displayPosts = isFromSanity

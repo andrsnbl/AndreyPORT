@@ -1,0 +1,381 @@
+/* ── PaymentModal.module.css ── */
+/* Modal pembayaran dengan styling modern */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: var(--card);
+  border-radius: 16px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ─────────────────────────────── HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.header h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text2);
+  transition: color var(--transition);
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn:hover {
+  color: var(--text);
+}
+
+/* ─────────────────────────────── ORDER SUMMARY */
+.orderSummary {
+  padding: 1.5rem;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+}
+
+.orderSummary h4 {
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--text2);
+  letter-spacing: 0.5px;
+}
+
+.summaryItems {
+  margin-bottom: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  font-size: 0.9rem;
+  color: var(--text2);
+  border-bottom: 1px solid var(--border);
+}
+
+.summaryItem:last-child {
+  border-bottom: none;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.8rem;
+  margin-top: 0.8rem;
+  border-top: 2px solid var(--border);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* ─────────────────────────────── PAYMENT METHODS */
+.paymentMethods {
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.paymentMethods h4 {
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--text2);
+  letter-spacing: 0.5px;
+}
+
+.methodOption {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.methodOption:hover {
+  border-color: var(--accent);
+  background: rgba(124, 58, 237, 0.05);
+}
+
+.methodOption.selected {
+  border-color: var(--accent);
+  background: rgba(124, 58, 237, 0.1);
+}
+
+.methodOption input[type="radio"] {
+  margin-top: 2px;
+  margin-right: 1rem;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.methodLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+.methodIcon {
+  font-size: 1.3rem;
+}
+
+.methodLabel strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.methodLabel small {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text2);
+  margin-top: 0.2rem;
+}
+
+/* ─────────────────────────────── FORM SECTION */
+.formSection {
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.formSection h4 {
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--text2);
+  letter-spacing: 0.5px;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  background: var(--surface);
+  color: var(--text);
+  margin-bottom: 0.8rem;
+  font-family: inherit;
+  transition: border-color var(--transition);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.input:disabled,
+.textarea:disabled {
+  background: var(--border);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ─────────────────────────────── FOOTER */
+.footer {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--surface);
+}
+
+.cancelBtn,
+.payBtn {
+  flex: 1;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.cancelBtn {
+  background: var(--border);
+  color: var(--text);
+}
+
+.cancelBtn:hover:not(:disabled) {
+  background: var(--text2);
+  color: white;
+}
+
+.payBtn {
+  background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 100%);
+  color: white;
+}
+
+.payBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+}
+
+.payBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancelBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ─────────────────────────────── SUCCESS MESSAGE */
+.successMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  min-height: 300px;
+}
+
+.successIcon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #25d366 0%, #20ba5d 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.successMessage h3 {
+  font-size: 1.3rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--text);
+}
+
+.successMessage p {
+  color: var(--text2);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─────────────────────────────── RESPONSIVE */
+@media (max-width: 640px) {
+  .modal {
+    border-radius: 12px;
+  }
+
+  .header {
+    padding: 1.2rem;
+  }
+
+  .header h2 {
+    font-size: 1.1rem;
+  }
+
+  .orderSummary,
+  .paymentMethods,
+  .formSection,
+  .footer {
+    padding: 1rem;
+  }
+
+  .methodOption {
+    padding: 0.8rem;
+  }
+
+  .methodLabel {
+    gap: 0.6rem;
+  }
+
+  .methodIcon {
+    font-size: 1.1rem;
+  }
+
+  .methodLabel strong {
+    font-size: 0.9rem;
+  }
+
+  .methodLabel small {
+    font-size: 0.75rem;
+  }
+
+  .input,
+  .textarea {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .cancelBtn,
+  .payBtn {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}

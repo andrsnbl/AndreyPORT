@@ -5,6 +5,7 @@
     "resume": "Resume",
     "services": "Layanan",
     "portfolio": "Portfolio",
+    "storefront": "Toko",
     "clients": "Klien",
     "blog": "Blog",
     "contact": "Kontak"
@@ -117,6 +118,53 @@
       "mobiledesign": "Mobile Design",
       "seo": "SEO",
       "graphic": "Grafis"
+    }
+  },
+  "storefront": {
+    "tag": "🛍️ Koleksi Produk",
+    "title": "Toko",
+    "titleSpan": "Kami",
+    "subtitle": "Produk pilihan dengan kualitas terbaik",
+    "all": "Semua Produk",
+    "addCart": "Tambah Keranjang",
+    "askVia": "Tanya di WhatsApp",
+    "order": "Pesan Sekarang",
+    "noproducts": "Tidak ada produk di kategori ini",
+    "categories": {
+      "fashion": "Fashion",
+      "electronics": "Elektronik",
+      "accessories": "Aksesori",
+      "lifestyle": "Gaya Hidup"
+    },
+    "cart": {
+      "title": "Keranjang Anda",
+      "items": "Produk",
+      "total": "Total:",
+      "checkout": "Lanjut ke Pembayaran"
+    },
+    "payment": {
+      "title": "Pembayaran",
+      "fillForm": "Isi semua data terlebih dahulu",
+      "orderSummary": "Ringkasan Pesanan",
+      "total": "Total",
+      "method": "Metode Pembayaran",
+      "contactInfo": "Data Kontak",
+      "namePh": "Nama Lengkap",
+      "emailPh": "Email",
+      "phonePh": "No. WhatsApp",
+      "addressPh": "Alamat Pengiriman",
+      "bankTransfer": "Transfer Bank",
+      "bankTransferDesc": "Transfer langsung ke rekening kami",
+      "cancel": "Batal",
+      "confirm": "Bayar Sekarang",
+      "processing": "Memproses...",
+      "success": "Pembayaran Berhasil!",
+      "successDesc": "Terima kasih atas pembelian Anda. Anda akan menerima konfirmasi via email."
+    },
+    "cta": {
+      "title": "Ingin tahu lebih banyak?",
+      "desc": "Hubungi kami sekarang untuk penawaran spesial dan konsultasi gratis",
+      "button": "Chat dengan Kami"
     }
   },
   "testimonial": {
