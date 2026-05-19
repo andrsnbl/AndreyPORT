@@ -1,11 +1,12 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Navbar    from './components/Navbar'
-import ScrollTop from './components/ScrollTop'
-import Hero      from './components/Hero'
-import useScrollAnimation from './hooks/useScrollAnimation'
+import Navbar         from './components/Navbar'
+import ScrollTop      from './components/ScrollTop'
+import Hero           from './components/Hero'
 import StructuredData from './components/StructuredData'
+import useScrollAnimation from './hooks/useScrollAnimation'
 
+// Lazy load sections
 const About       = lazy(() => import('./components/About'))
 const Resume      = lazy(() => import('./components/Resume'))
 const Services    = lazy(() => import('./components/Services'))
@@ -17,6 +18,7 @@ const Contact     = lazy(() => import('./components/Contact'))
 const Footer      = lazy(() => import('./components/Footer'))
 const AdminPage   = lazy(() => import('./pages/admin/AdminPage'))
 
+// ─── Baca preferensi awal SEKALI saja ────────────────────────
 const getSavedDark = () => {
   try {
     const saved = localStorage.getItem('darkMode')
@@ -25,8 +27,10 @@ const getSavedDark = () => {
   } catch { return false }
 }
 
-// PortfolioHome di-memoize agar tidak re-render karena prop dark berubah
-// saat App re-render — mencegah useScrollAnimation jalan berulang
+// ─── Portfolio home ───────────────────────────────────────────
+// Didefinisikan DI LUAR App agar referensi komponen stabil
+// (tidak di-recreate tiap render App) — mencegah full unmount/remount
+// saat dark mode di-toggle
 function PortfolioHome({ dark, toggleDark }) {
   useScrollAnimation()
 
@@ -36,7 +40,7 @@ function PortfolioHome({ dark, toggleDark }) {
       <Navbar dark={dark} toggleDark={toggleDark} />
       <main>
         <Hero />
-        <Suspense fallback={<div style={{ minHeight: '100px' }} />}>
+        <Suspense fallback={null}>
           <About />
           <Resume />
           <Services />
@@ -55,17 +59,19 @@ function PortfolioHome({ dark, toggleDark }) {
   )
 }
 
+// ─── Root App ─────────────────────────────────────────────────
 export default function App() {
   const [dark, setDark] = useState(getSavedDark)
 
+  // Terapkan tema ke <html> dan simpan ke localStorage
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
     try { localStorage.setItem('darkMode', String(dark)) } catch {}
   }, [dark])
 
-  // toggleDark dibuat stabil dengan useCallback tidak perlu — cukup
-  // definisikan di luar render agar referensi tidak berubah tiap render
-  const toggleDark = () => setDark(d => !d)
+  // useCallback agar referensi toggleDark stabil → tidak trigger
+  // re-render pada Navbar dan PortfolioHome tiap kali App render
+  const toggleDark = useCallback(() => setDark(d => !d), [])
 
   return (
     <BrowserRouter>
