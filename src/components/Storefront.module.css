@@ -64,10 +64,17 @@
   border: 2px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
-  transition: all var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
   display: flex;
   flex-direction: column;
   position: relative;
+  /* Animasi masuk — jalan setiap kali elemen di-mount (termasuk saat filter ganti) */
+  animation: cardEnter 0.4s ease both;
+}
+
+@keyframes cardEnter {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .productCard:hover {

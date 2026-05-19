@@ -55,6 +55,21 @@ export default function useScrollAnimation() {
       }
     )
 
+    // ✨ FIX: Check elemen yang sudah terlihat saat page load (initial visibility check)
+    const checkInitiallyVisibleElements = () => {
+      const elements = document.querySelectorAll('.fade-in:not(.visible)')
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        // Jika elemen sudah terlihat di viewport, langsung tambah class .visible
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('visible')
+        }
+      })
+    }
+
+    // Jalankan check untuk elemen yang sudah terlihat (TANPA delay)
+    checkInitiallyVisibleElements()
+
     // Jalankan sekali saat mount
     const observer = activate()
     const sections = document.querySelectorAll('main section[id]')
@@ -65,6 +80,7 @@ export default function useScrollAnimation() {
     const timer = setTimeout(() => {
       observer.disconnect()
       activate()
+      checkInitiallyVisibleElements() // Check lagi setelah delay
     }, 100)
 
     return () => {

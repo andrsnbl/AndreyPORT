@@ -19,8 +19,9 @@ const initGA = () => {
 
 initGA()
 
+// Hapus StrictMode — di development StrictMode memanggil setiap
+// useEffect DUA KALI, yang menyebabkan glitch pada rAF orbit,
+// IntersectionObserver, dan animasi lainnya.
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 )

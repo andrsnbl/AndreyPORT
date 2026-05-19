@@ -1,44 +1,80 @@
-// ─────────────────────────────────────────────────────────────
-//  supabase.js
-//  Supabase client untuk tracking download CV
-// ─────────────────────────────────────────────────────────────
-
+// src/lib/supabase.js
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const url = import.meta.env.VITE_SUPABASE_URL
+const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
-export const supabase = supabaseUrl && supabaseAnonKey
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null
-
-if (!supabase) {
-  console.warn('[Supabase] Belum dikonfigurasi. Buat file .env dengan VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY')
+if (!url || !key) {
+  console.warn('[Supabase] env variables missing')
 }
 
-/** Mendapatkan jumlah download dari Supabase */
+export const supabase = createClient(url, key)
+
+/**
+ * Get CV download count from Supabase
+ * Returns null if table doesn't exist or error occurs
+ */
 export async function getDownloadCount() {
-  if (!supabase) return null
-  const { data, error } = await supabase
-    .from('stats')
-    .select('download_count')
-    .eq('id', 'main')
-    .single()
-  if (error) {
-    console.error('[Supabase] getDownloadCount error:', error.message)
-    return null
+  try {
+    const { data, error } = await supabase
+      .from('cv_downloads')
+      .select('count')
+      .eq('id', 'cv_count')
+      .single()
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        // Table doesn't exist yet
+        console.log('[CV Downloads] Table tidak ada, returning 0')
+        return 0
+      }
+      throw error
+    }
+
+    return data?.count || 0
+  } catch (error) {
+    console.error('[CV Downloads] Error fetching count:', error.message)
+    return null // Return null jika error, agar tidak crash
   }
-  return data?.download_count ?? 0
 }
 
-/** Menambah jumlah download di Supabase (RPC mengembalikan array) */
+/**
+ * Increment CV download count in Supabase
+ * Returns new count if successful, null if error
+ */
 export async function incrementDownloadCount() {
-  if (!supabase) return null
-  const { data, error } = await supabase.rpc('increment_download_count')
-  if (error) {
-    console.error('[Supabase] incrementDownloadCount error:', error.message)
-    return null
+  try {
+    // Cek apakah record sudah ada
+    const { data: existing } = await supabase
+      .from('cv_downloads')
+      .select('count')
+      .eq('id', 'cv_count')
+      .single()
+
+    if (existing) {
+      // Update existing record
+      const { data, error } = await supabase
+        .from('cv_downloads')
+        .update({ count: existing.count + 1 })
+        .eq('id', 'cv_count')
+        .select('count')
+        .single()
+
+      if (error) throw error
+      return data?.count || null
+    } else {
+      // Insert new record jika tidak ada
+      const { data, error } = await supabase
+        .from('cv_downloads')
+        .insert([{ id: 'cv_count', count: 1 }])
+        .select('count')
+        .single()
+
+      if (error) throw error
+      return data?.count || null
+    }
+  } catch (error) {
+    console.error('[CV Downloads] Error incrementing count:', error.message)
+    return null // Return null jika error, agar tidak crash
   }
-  const row = Array.isArray(data) ? data[0] : data
-  return row?.download_count ?? null
 }

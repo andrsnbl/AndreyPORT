@@ -5,28 +5,23 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PRODUCTS, PRODUCT_CATEGORIES } from '../data/portfolioData'
+import { useProducts } from '../hooks/useProducts'
+import { PRODUCT_CATEGORIES } from '../data/portfolioData'
 import PaymentModal from './PaymentModal'
 import styles from './Storefront.module.css'
 
 export default function Storefront() {
   const { t } = useTranslation()
+  const { products, loading } = useProducts()
   const [activeCategory, setActiveCategory] = useState('all')
   const [cart, setCart] = useState([])
   const [showPayment, setShowPayment] = useState(false)
 
-  // Filter produk berdasarkan kategori - FIXED: Improved filtering
   const filteredProducts = useMemo(() => {
-    if (!PRODUCTS || !Array.isArray(PRODUCTS)) return []
-    
-    if (activeCategory === 'all') return PRODUCTS
-    
-    const filtered = PRODUCTS.filter(product => {
-      return product && product.category === activeCategory
-    })
-    
-    return filtered
-  }, [activeCategory])
+    if (!products || !Array.isArray(products)) return []
+    if (activeCategory === 'all') return products
+    return products.filter(p => p?.category === activeCategory)
+  }, [activeCategory, products])
 
   // Format harga Indonesia
   const formatPrice = (price) => {
@@ -133,93 +128,77 @@ export default function Storefront() {
       </div>
 
       {/* ─────────────────────────────── GRID PRODUK */}
-      <div className={styles.productsGrid}>
-        {filteredProducts.map((product, i) => (
-          <div
-            key={product.id}
-            className={`${styles.productCard} fade-in fade-in-delay-${(i % 3) + 1}`}
-          >
-            {/* Badge diskon jika ada */}
-            {product.discount && (
-              <div className={styles.discountBadge}>
-                -{product.discount}%
-              </div>
-            )}
-
-            {/* Gambar produk */}
-            <div className={styles.imageContainer}>
-              <img
-                src={product.image}
-                alt={product.name}
-                className={styles.productImage}
-              />
-              <div className={styles.imageOverlay}>
-                <button
-                  className={styles.whatsappBtn}
-                  onClick={() => handleWhatsApp(product.name)}
-                  title="Tanya di WhatsApp"
-                >
-                  <span className={styles.waIcon}>💬</span>
-                  {t('storefront.askVia', { defaultValue: 'Tanya di WhatsApp' })}
-                </button>
-              </div>
-            </div>
-
-            {/* Konten produk */}
-            <div className={styles.productContent}>
-              <span className={styles.category}>
-                {PRODUCT_CATEGORIES.find(c => c.id === product.category)?.icon}
-                {t(`storefront.categories.${product.category}`, {
-                  defaultValue: PRODUCT_CATEGORIES.find(c => c.id === product.category)?.name,
-                })}
-              </span>
-              <h4 className={styles.productName}>{product.name}</h4>
-              <p className={styles.productDesc}>{product.description}</p>
-
-              {/* Harga */}
-              <div className={styles.priceSection}>
-                {product.originalPrice && (
-                  <span className={styles.originalPrice}>
-                    {formatPrice(product.originalPrice)}
-                  </span>
-                )}
-                <span className={styles.currentPrice}>
-                  {formatPrice(product.price)}
-                </span>
-              </div>
-
-              {/* Rating */}
-              {product.rating && (
-                <div className={styles.rating}>
-                  <span className={styles.stars}>★★★★★</span>
-                  <span className={styles.ratingText}>
-                    {product.rating} ({product.reviews} ulasan)
-                  </span>
-                </div>
+      {loading ? (
+        <div className={styles.emptyState}>⏳ Memuat produk...</div>
+      ) : (
+        <div className={styles.productsGrid}>
+          {filteredProducts.map((product, i) => (
+            <div
+              key={`${activeCategory}-${product.id}`}
+              className={styles.productCard}
+              style={{ animationDelay: `${i * 0.07}s` }}
+            >
+              {product.discount && (
+                <div className={styles.discountBadge}>-{product.discount}%</div>
               )}
-
-              {/* Tombol aksi */}
-              <div className={styles.actions}>
-                <button
-                  className={styles.addCart}
-                  onClick={() => handleAddToCart(product)}
-                >
-                  🛒 {t('storefront.addCart', { defaultValue: 'Keranjang' })}
-                </button>
-                <button
-                  className={styles.buyNow}
-                  onClick={() => handleWhatsApp(product.name)}
-                >
-                  💬 {t('storefront.order', { defaultValue: 'Pesan' })}
-                </button>
+              <div className={styles.imageContainer}>
+                <img
+                  src={product.image_url || product.image}
+                  alt={product.name}
+                  className={styles.productImage}
+                  onError={e => { e.target.src = 'https://via.placeholder.com/300x240?text=No+Image' }}
+                />
+                <div className={styles.imageOverlay}>
+                  <button className={styles.whatsappBtn}
+                    onClick={() => handleWhatsApp(product.name)}>
+                    <span className={styles.waIcon}>💬</span>
+                    {t('storefront.askVia', { defaultValue: 'Tanya di WhatsApp' })}
+                  </button>
+                </div>
+              </div>
+              <div className={styles.productContent}>
+                <span className={styles.category}>
+                  {PRODUCT_CATEGORIES.find(c => c.id === product.category)?.icon}
+                  {t(`storefront.categories.${product.category}`, {
+                    defaultValue: PRODUCT_CATEGORIES.find(c => c.id === product.category)?.name,
+                  })}
+                </span>
+                <h4 className={styles.productName}>{product.name}</h4>
+                <p className={styles.productDesc}>{product.description}</p>
+                <div className={styles.priceSection}>
+                  {(product.original_price || product.originalPrice) && (
+                    <span className={styles.originalPrice}>
+                      {formatPrice(product.original_price || product.originalPrice)}
+                    </span>
+                  )}
+                  <span className={styles.currentPrice}>{formatPrice(product.price)}</span>
+                </div>
+                {product.rating && (
+                  <div className={styles.rating}>
+                    <span className={styles.stars}>
+                      {'★'.repeat(Math.round(product.rating))}{'☆'.repeat(5 - Math.round(product.rating))}
+                    </span>
+                    <span className={styles.ratingText}>
+                      {product.rating} ({product.reviews} ulasan)
+                    </span>
+                  </div>
+                )}
+                <div className={styles.actions}>
+                  <button className={styles.addCart} onClick={() => handleAddToCart(product)}>
+                    🛒 {t('storefront.addCart', { defaultValue: 'Keranjang' })}
+                  </button>
+                  <button className={styles.buyNow} onClick={() => handleWhatsApp(product.name)}>
+                    💬 {t('storefront.order', { defaultValue: 'Pesan' })}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Pesan jika tidak ada produk */}
-      {filteredProducts.length === 0 && (
+      {!loading && filteredProducts.length === 0 && (
         <div className={styles.emptyState}>
           <p>⚠️ {t('storefront.noproducts', { defaultValue: 'Tidak ada produk di kategori ini' })}</p>
         </div>

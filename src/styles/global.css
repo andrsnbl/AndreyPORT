@@ -77,6 +77,14 @@ section {
   margin: 0 auto;
 }
 
+/* Hero full-width — override section constraint */
+section#hero {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 /* ── Label kecil di atas judul section ── */
 .section-tag {
   display: inline-block;
@@ -173,11 +181,13 @@ section {
 /* State awal: tersembunyi */
 .fade-in {
   opacity: 0;
+  /* Fallback: jika JS gagal, show setelah 2s sebagai safety net */
+  animation: fadeUp 0.65s ease forwards 2s;
 }
 
-/* Saat JS tambah class .visible → animasi jalan */
+/* Saat JS tambah class .visible → animasi jalan IMMEDIATE */
 .fade-in.visible {
-  animation: fadeUp 0.65s ease forwards;
+  animation: fadeUp 0.65s ease forwards 0s;
 }
 
 /* Delay untuk efek stagger (berurutan) */
