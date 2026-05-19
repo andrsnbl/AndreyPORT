@@ -9,6 +9,7 @@ export function useProducts() {
   const [error, setError]         = useState(null)
 
   const fetchProducts = useCallback(async () => {
+    if (!supabase) { setLoading(false); return }   // env tidak tersedia
     setLoading(true)
     setError(null)
     const { data, error } = await supabase

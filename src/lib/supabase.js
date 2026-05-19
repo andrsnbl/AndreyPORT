@@ -5,10 +5,13 @@ const url = import.meta.env.VITE_SUPABASE_URL
 const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
 if (!url || !key) {
-  console.warn('[Supabase] env variables missing')
+  console.warn('[Supabase] env variables missing — fitur database dinonaktifkan')
 }
 
-export const supabase = createClient(url, key)
+// Guard: hanya buat client jika kedua env tersedia
+// Tanpa ini, createClient(undefined, undefined) throw ReferenceError
+// yang crash seluruh React tree di production
+export const supabase = (url && key) ? createClient(url, key) : null
 
 /**
  * Get CV download count from Supabase
