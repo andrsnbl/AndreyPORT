@@ -2,15 +2,17 @@
 import { createClient } from '@supabase/supabase-js'
 
 const url = import.meta.env.VITE_SUPABASE_URL
+// Support dua nama key yang umum dipakai
 const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+        || import.meta.env.VITE_SUPABASE_ANON_KEY
 
 if (!url || !key) {
-  console.warn('[Supabase] env variables missing — fitur database dinonaktifkan')
+  console.warn('[Supabase] env variables missing:', {
+    hasUrl: !!url,
+    hasKey: !!key,
+  })
 }
 
-// Guard: hanya buat client jika kedua env tersedia
-// Tanpa ini, createClient(undefined, undefined) throw ReferenceError
-// yang crash seluruh React tree di production
 export const supabase = (url && key) ? createClient(url, key) : null
 
 /**

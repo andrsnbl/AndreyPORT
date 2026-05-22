@@ -60,12 +60,33 @@ export function useProducts() {
 
   // ── Upload gambar ke Supabase Storage ───────────────
   const uploadImage = async (file) => {
-    const ext  = file.name.split('.').pop()
-    const path = `products/${Date.now()}.${ext}`
-    const { error } = await supabase.storage
+    if (!supabase) throw new Error('Supabase tidak tersedia')
+
+    // Validasi tipe file
+    const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+    if (!allowed.includes(file.type))
+      throw new Error('Format file tidak didukung. Gunakan JPG, PNG, atau WebP.')
+
+    // Validasi ukuran (max 5MB)
+    if (file.size > 5 * 1024 * 1024)
+      throw new Error('Ukuran file terlalu besar. Maksimal 5MB.')
+
+    const ext  = file.name.split('.').pop().toLowerCase()
+    const path = `products/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
+
+    const { error: uploadError } = await supabase.storage
       .from('products')
-      .upload(path, file, { upsert: true })
-    if (error) throw new Error(error.message)
+      .upload(path, file, { upsert: true, contentType: file.type })
+
+    if (uploadError) {
+      // Pesan error yang lebih jelas
+      if (uploadError.message.includes('Bucket not found'))
+        throw new Error('Bucket storage belum dibuat. Buat bucket "products" di Supabase Storage.')
+      if (uploadError.message.includes('policy') || uploadError.message.includes('security'))
+        throw new Error('Akses ditolak. Pastikan sudah login sebagai admin dan policy storage sudah diset.')
+      throw new Error(`Upload gagal: ${uploadError.message}`)
+    }
+
     const { data } = supabase.storage.from('products').getPublicUrl(path)
     return data.publicUrl
   }
